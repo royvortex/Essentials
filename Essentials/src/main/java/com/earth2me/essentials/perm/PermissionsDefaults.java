@@ -20,13 +20,13 @@ public final class PermissionsDefaults {
         }
     }
     
-    public static void registerBackDefaultFor(final World w) {
-        final String permName = "essentials.back.into." + w.getName();
+    public static void registerDeathbackDefaultFor(final World w) {
+        final String permName = "essentials.deathback.into." + w.getName();
 
         Permission p = Bukkit.getPluginManager().getPermission(permName);
         if (p == null) {
             p = new Permission(permName,
-                "Allows access to /back when the destination location is within world " + w.getName(),
+                "Allows access to /deathback when the destination location is within world " + w.getName(),
                 PermissionDefault.TRUE);
             Bukkit.getPluginManager().addPermission(p);
         }

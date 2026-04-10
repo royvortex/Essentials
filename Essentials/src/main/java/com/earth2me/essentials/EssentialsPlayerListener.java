@@ -665,7 +665,7 @@ public class EssentialsPlayerListener implements Listener {
             return;
         }
         final User user = ess.getUser(player);
-        if (ess.getSettings().registerBackInListener() && user.isAuthorized("essentials.back.onteleport")) {
+        if (ess.getSettings().registerBackInListener() && user.isAuthorized("essentials.deathback.onteleport")) {
             user.setLastLocation();
         }
         if (ess.getSettings().isTeleportInvulnerability()) {

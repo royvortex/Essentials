@@ -176,7 +176,7 @@ public class AsyncTeleport implements IAsyncTeleport {
             }
         }
 
-        if (teleportee.isAuthorized("essentials.back.onteleport")) {
+        if (teleportee.isAuthorized("essentials.deathback.onteleport")) {
             teleportee.setLastLocation();
         }
 

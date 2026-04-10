@@ -1773,7 +1773,7 @@ public class Settings implements net.ess3.api.ISettings {
 
         if (config.hasProperty("teleport-when-freed")) {
             // snakeyaml more like cursedyaml
-            final String value = config.getString("teleport-when-freed", "back").replace("false", "off");
+            final String value = config.getString("teleport-when-freed", "deathback").replace("false", "off");
             try {
                 return TeleportWhenFreePolicy.valueOf(value.toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException e) {

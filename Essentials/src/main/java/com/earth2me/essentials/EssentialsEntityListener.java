@@ -167,7 +167,7 @@ public class EssentialsEntityListener implements Listener {
             final Location loc = user.getLocation();
             user.sendTl("infoAfterDeath", loc.getWorld().getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
         }
-        if (user.isAuthorized("essentials.back.ondeath") && !ess.getSettings().isCommandDisabled("back")) {
+        if (user.isAuthorized("essentials.deathback.ondeath") && !ess.getSettings().isCommandDisabled("deathback")) {
             user.setLastLocation();
             user.sendTl("backAfterDeath");
         }

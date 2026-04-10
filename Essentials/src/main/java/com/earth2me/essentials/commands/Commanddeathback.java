@@ -9,15 +9,15 @@ import org.bukkit.Server;
 import java.util.Collections;
 import java.util.List;
 
-public class Commandback extends EssentialsCommand {
-    public Commandback() {
-        super("back");
+public class Commanddeathback extends EssentialsCommand {
+    public Commanddeathback() {
+        super("deathback");
     }
 
     @Override
     protected void run(final Server server, final User user, final String commandLabel, final String[] args) throws Exception {
         final CommandSource sender = user.getSource();
-        if (args.length > 0 && user.isAuthorized("essentials.back.others")) {
+        if (args.length > 0 && user.isAuthorized("essentials.deathback.others")) {
             parseOthers(server, sender, args, commandLabel);
             return;
         }
@@ -55,8 +55,8 @@ public class Commandback extends EssentialsCommand {
                 throw new TranslatableException("noPerm", "essentials.worlds." + lastWorldName);
             }
 
-            if (!requester.isAuthorized("essentials.back.into." + lastWorldName)) {
-                throw new TranslatableException("noPerm", "essentials.back.into." + lastWorldName);
+            if (!requester.isAuthorized("essentials.deathback.into." + lastWorldName)) {
+                throw new TranslatableException("noPerm", "essentials.deathback.into." + lastWorldName);
             }
         }
 
@@ -76,7 +76,7 @@ public class Commandback extends EssentialsCommand {
 
     @Override
     protected List<String> getTabCompleteOptions(final Server server, final User user, final String commandLabel, final String[] args) {
-        if (user.isAuthorized("essentials.back.others") && args.length == 1) {
+        if (user.isAuthorized("essentials.deathback.others") && args.length == 1) {
             return getPlayers(user);
         } else {
             return Collections.emptyList();
