@@ -34,14 +34,7 @@ rootProject.name = "EssentialsXParent"
 // Modules
 sequenceOf(
     "",
-    "AntiBuild",
-    "Chat",
-    "Discord",
-    "DiscordLink",
-    "GeoIP",
-    "Protect",
     "Spawn",
-    "XMPP",
 ).forEach {
     include(":EssentialsX$it")
     project(":EssentialsX$it").projectDir = file("Essentials$it")
