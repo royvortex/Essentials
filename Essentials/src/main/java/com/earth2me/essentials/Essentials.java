@@ -159,7 +159,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private final transient ProviderFactory providerFactory = new ProviderFactory(this);
     private transient ISettings settings;
     private transient Warps warps;
-    private transient Worth worth;
     private transient List<IConf> confList;
     private transient Backup backup;
     private transient AbstractItemDb itemDb;
@@ -287,10 +286,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             warps = new Warps(this.getDataFolder());
             confList.add(warps);
             execTimer.mark("Init(Warp)");
-
-            worth = new Worth(this.getDataFolder());
-            confList.add(worth);
-            execTimer.mark("Init(Worth)");
 
             itemDb = getItemDbFromConfig();
             confList.add(itemDb);
@@ -872,11 +867,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     @Override
     public Warps getWarps() {
         return warps;
-    }
-
-    @Override
-    public Worth getWorth() {
-        return worth;
     }
 
     @Override

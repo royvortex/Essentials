@@ -306,10 +306,6 @@ public interface ISettings extends IConf {
 
     List<EssentialsSign> getUnprotectedSignNames();
 
-    boolean isAllowBulkBuySell();
-
-    boolean isAllowSellNamedItems();
-
     boolean isAddingPrefixInPlayerlist();
 
     boolean isAddingSuffixInPlayerlist();
@@ -359,8 +355,6 @@ public interface ISettings extends IConf {
     boolean showZeroBaltop();
 
     String getNickRegex();
-
-    BigDecimal getMultiplier(final User user);
 
     int getMaxItemLore();
 

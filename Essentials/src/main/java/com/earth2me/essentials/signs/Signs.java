@@ -4,7 +4,6 @@ package com.earth2me.essentials.signs;
 public enum Signs {
     ANVIL(new SignAnvil()),
     BALANCE(new SignBalance()),
-    BUY(new SignBuy()),
     CARTOGRAPHY(new SignCartography()),
     DISPOSAL(new SignDisposal()),
     ENCHANT(new SignEnchant()),
@@ -16,7 +15,6 @@ public enum Signs {
     LOOM(new SignLoom()),
     PROTECTION(new SignProtection()),
     REPAIR(new SignRepair()),
-    SELL(new SignSell()),
     SMITHING(new SignSmithing()),
     SPAWNMOB(new SignSpawnmob()),
     TIME(new SignTime()),

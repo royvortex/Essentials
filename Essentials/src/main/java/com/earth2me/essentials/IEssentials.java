@@ -82,8 +82,6 @@ public interface IEssentials extends Plugin {
 
     IWarps getWarps();
 
-    Worth getWorth();
-
     Backup getBackup();
 
     RandomTeleport getRandomTeleport();
