@@ -369,8 +369,6 @@ permissions:
   essentials.balancetop.exclude:
     default: false
     description: Players with this permission are excluded from the balancetop
-  essentials.bottom:
-    description: Allows access to the /bottom command
   essentials.broadcast:
     description: Allows access to the /broadcast command
   essentials.broadcastworld:
