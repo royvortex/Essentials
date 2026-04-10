@@ -23,10 +23,6 @@ commands:
     description: Gets the top balance values.
     usage: /<command> [page]
     aliases: [ebalancetop,baltop,ebaltop]
-  bottom:
-    description: Teleport to the lowest block at your current position.
-    usage: /<command>
-    aliases: [ ebottom ]
   broadcast:
     description: Broadcasts a message to the entire server.
     usage: /<command> <msg>
