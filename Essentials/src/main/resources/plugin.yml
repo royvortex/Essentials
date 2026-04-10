@@ -174,22 +174,6 @@ commands:
     description: Shows information set by the server owner.
     usage: /<command> [chapter] [page]
     aliases: [about,eabout,ifo,eifo,einfo,inform,einform,news,enews]
-  item:
-    description: Spawn an item.
-    usage: /<command> <item|numeric> [amount [itemmeta...]]
-    aliases: [i,eitem,ei]
-  itemdb:
-    description: Searches for an item.
-    usage: /<command> <item>
-    aliases: [dura,edura,durability,edurability,eitemdb,itemno,eitemno]
-  itemlore:
-    description: Edit the lore of an item.
-    usage: /<command> <add/set/clear> [text/line] [text]
-    aliases: [lore, elore, ilore, eilore, eitemlore]
-  itemname:
-    description: Names an item.
-    usage: /<command> [name]
-    aliases: [iname, einame, eitemname, itemrename, irename, eitemrename, eirename]
   jump:
     description: Jumps to the nearest block in the line of sight.
     usage: /<command>
@@ -338,10 +322,6 @@ commands:
     description: Edits a sign in the world.
     usage: /<command> <set/clear/copy/paste> [line number] [text]
     aliases: [sign, esign, eeditsign]
-  skull:
-    description: Set the owner of a player skull
-    usage: /<command> [owner] [player]
-    aliases: [eskull, playerskull, eplayerskull, head, ehead]
   smithingtable:
     description: Opens up a smithing table.
     usage: /<command>
@@ -676,8 +656,6 @@ permissions:
     description: Allows access to the /ignore command
   essentials.info:
     description: Allows access to the /info command
-  essentials.item:
-    description: Allows access to the /item command
   essentials.itemspawn.exempt:
     description: Allows the bearer to spawn items in the item blacklist
   essentials.itemspawn.meta-chapter-<chapter>:
@@ -694,22 +672,6 @@ permissions:
     description: Allows the bearer to spawn items with lore metadata
   essentials.itemspawn.meta-title:
     description: Allows the bearer to spawn items with title metadata
-  essentials.itemlore:
-    description: Allows access to the /itemlore command
-  essentials.itemdb:
-    description: Allows access to the /itemdb command
-  essentials.itemname:
-    description: Allows access to the /itemname command
-  essentials.itemname.format:
-    description: Allows access to the /itemname command with formatting text
-  essentials.itemname.magic:
-    description: Allows access to the /itemname command with magic text
-  essentials.itemname.color:
-    description: Allows access to the /itemname command with color text
-  essentials.itemname.rgb:
-    description: Allows access to the /itemname command with RGB text
-  essentials.itemname.prevent-type.<item-name>:
-    description: Prevents the player from using the /itemname command with the specified item
   essentials.jump:
     description: Allows access to the /jump command
   essentials.jump.lock:
@@ -869,14 +831,6 @@ permissions:
   essentials.silentquit:
     default: false
     description: Suppress leave/quit messages for users with this permission.
-  essentials.skull:
-    description: Allows access to the /skull command
-  essentials.skull.modify:
-    description: Allows access to modify other players skulls with the /skull command
-  essentials.skull.others:
-    description: Allows access to creating other players skulls with the /skull command
-  essentials.skull.spawn:
-    description: Allows access to spawn a skull with the /skull command
   essentials.sleepingignored:
     description: Allows the bearer to not be required to sleep to skip the night
   essentials.socialspy:
