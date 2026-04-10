@@ -77,8 +77,6 @@ public interface ISettings extends IConf {
 
     boolean isSocialSpyDisplayNames();
 
-    Set<String> getMuteCommands();
-
     String getLocale();
 
     boolean isPerPlayerLocale();
@@ -379,8 +377,6 @@ public interface ISettings extends IConf {
     boolean isConfirmCommandEnabledByDefault(String commandName);
 
     TeleportWhenFreePolicy getTeleportWhenFreePolicy();
-
-    boolean isJailOnlineTime();
 
     boolean isCompassTowardsHomePerm();
 

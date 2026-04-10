@@ -158,7 +158,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private final transient Map<String, IEssentialsCommand> commandMap = new HashMap<>();
     private final transient ProviderFactory providerFactory = new ProviderFactory(this);
     private transient ISettings settings;
-    private transient Jails jails;
     private transient Warps warps;
     private transient Worth worth;
     private transient List<IConf> confList;
@@ -306,10 +305,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
                 customItemResolver = null;
             }
             execTimer.mark("Init(CustomItemResolver)");
-
-            jails = new Jails(this);
-            confList.add(jails);
-            execTimer.mark("Init(Jails)");
 
             EconomyLayers.onEnable(this);
             execTimer.mark("Init(EconomyLayers)");
@@ -885,11 +880,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     @Override
     public BukkitScheduler getScheduler() {
         return this.getServer().getScheduler();
-    }
-
-    @Override
-    public IJails getJails() {
-        return jails;
     }
 
     @Override

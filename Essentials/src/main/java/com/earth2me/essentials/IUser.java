@@ -170,59 +170,6 @@ public interface IUser {
 
     void setLastTeleportTimestamp(long time);
 
-    String getJail();
-
-    void setJail(String jail);
-
-    String getFormattedJailTime();
-
-    /**
-     * Returns last activity time.
-     * <p>
-     * It is used internally to determine if user's afk status should be set to
-     * true because of ACTIVITY {@link AfkStatusChangeEvent.Cause}, or the player
-     * should be kicked for being afk too long.
-     *
-     * @return Last activity time (Epoch Milliseconds)
-     */
-    long getLastActivityTime();
-
-    boolean isAfk();
-
-    @Deprecated
-    void setAfk(final boolean set);
-
-    boolean isIgnoreMsg();
-
-    void setIgnoreMsg(boolean ignoreMsg);
-
-    @Deprecated
-    void setConfigProperty(String node, Object object);
-
-    Set<String> getConfigKeys();
-
-    Map<String, Object> getConfigMap();
-
-    Map<String, Object> getConfigMap(String node);
-
-    @Deprecated
-    Map<Pattern, Long> getCommandCooldowns();
-
-    List<CommandCooldown> getCooldownsList();
-
-    Date getCommandCooldownExpiry(String label);
-
-    void addCommandCooldown(Pattern pattern, Date expiresAt, boolean save);
-
-    boolean clearCommandCooldown(Pattern pattern);
-
-    /*
-     *  PlayerExtension
-     */
-    Player getBase();
-
-    CommandSource getSource();
-
     String getName();
 
     UUID getUUID();

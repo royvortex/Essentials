@@ -77,7 +77,6 @@ public class Settings implements net.ess3.api.ISettings {
     private final transient Map<String, Command> disabledBukkitCommands = new HashMap<>();
     private Map<String, BigDecimal> commandCosts;
     private Set<String> socialSpyCommands = new HashSet<>();
-    private Set<String> muteCommands = new HashSet<>();
     private String nicknamePrefix = "~";
     private String operatorColor = null;
     private List<Material> itemSpawnBl = new ArrayList<>();
@@ -486,22 +485,6 @@ public class Settings implements net.ess3.api.ISettings {
         return config.getBoolean("socialspy-uses-displaynames", true);
     }
 
-    private Set<String> _getMuteCommands() {
-        final Set<String> muteCommands = new HashSet<>();
-        if (config.isList("mute-commands")) {
-            for (final String s : config.getList("mute-commands", String.class)) {
-                muteCommands.add(s.toLowerCase(Locale.ENGLISH));
-            }
-        }
-
-        return muteCommands;
-    }
-
-    @Override
-    public Set<String> getMuteCommands() {
-        return muteCommands;
-    }
-
     private String _getNicknamePrefix() {
         return config.getString("nickname-prefix", "~");
     }
@@ -897,7 +880,6 @@ public class Settings implements net.ess3.api.ISettings {
         isCustomQuitMessage = !customQuitMessage.equals("none");
         customNewUsernameMessage = _getCustomNewUsernameMessage();
         isCustomNewUsernameMessage = !customNewUsernameMessage.equals("none");
-        muteCommands = _getMuteCommands();
         spawnOnJoinGroups = _getSpawnOnJoinGroups();
         commandCooldowns = _getCommandCooldowns();
         npcsInBalanceRanking = _isNpcsInBalanceRanking();
@@ -1929,11 +1911,6 @@ public class Settings implements net.ess3.api.ISettings {
     @Override
     public TeleportWhenFreePolicy getTeleportWhenFreePolicy() {
         return teleportWhenFreePolicy;
-    }
-
-    @Override
-    public boolean isJailOnlineTime() {
-        return config.getBoolean("jail-online-time", false);
     }
 
     private boolean _isCompassTowardsHomePerm() {
