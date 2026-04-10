@@ -72,14 +72,6 @@ public interface IMessageRecipient {
     MessageResponse onReceiveMessage(IMessageRecipient sender, String message);
 
     /**
-     * Returns the name of this recipient. This name is typically used internally to identify this recipient.
-     *
-     * @return name of this recipient
-     * @see #getDisplayName()
-     */
-    String getName();
-
-    /**
      * Returns the display name of this recipient. This name is typically used when formatting messages.
      *
      * @return display name of this recipient
@@ -134,7 +126,7 @@ public interface IMessageRecipient {
         EVENT_CANCELLED;
 
         /**
-         * Returns whether this response is a success. In other words equal to {@link #SUCCESS} or {@link #SUCCESS_BUT_AFK}
+         * Returns whether this response is a success.
          *
          * @return whether the response is a success
          */

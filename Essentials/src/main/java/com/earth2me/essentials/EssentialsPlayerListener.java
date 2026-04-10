@@ -2,7 +2,6 @@ package com.earth2me.essentials;
 
 import com.destroystokyo.paper.ClientOption;
 import com.earth2me.essentials.adventure.ComponentHolder;
-import com.earth2me.essentials.commands.Commandfireball;
 import com.earth2me.essentials.craftbukkit.Inventories;
 import com.earth2me.essentials.textreader.IText;
 import com.earth2me.essentials.textreader.KeywordReplacer;
@@ -750,68 +749,9 @@ public class EssentialsPlayerListener implements Listener {
                     }
                 }
             }
-        }
+}
 
         final User user = ess.getUser(player);
-        return;
-
-        boolean broadcast = true; // whether to broadcast the updated activity
-        boolean update = true; // Only modified when the command is afk
-
-        if (pluginCommand != null) {
-            // Switch case for commands that shouldn't broadcast afk activity.
-            switch (pluginCommand.getName()) {
-                case "afk":
-                    update = false;
-                    // fall through
-                case "vanish":
-                    broadcast = false;
-                    break;
-            }
-        }
-
-        if (update) {
-            user.updateActivityOnInteract(broadcast);
-        }
-
-        if (ess.getSettings().isCommandCooldownsEnabled()
-            && !user.isAuthorized("essentials.commandcooldowns.bypass")
-            && (pluginCommand == null || !user.isAuthorized("essentials.commandcooldowns.bypass." + pluginCommand.getName()))) {
-            final int argStartIndex = effectiveCommand.indexOf(" ");
-            final String args = argStartIndex == -1 ? "" // No arguments present
-                : " " + effectiveCommand.substring(argStartIndex); // arguments start at argStartIndex; substring from there.
-            final String fullCommand = pluginCommand == null ? effectiveCommand : pluginCommand.getName() + args;
-
-            // Used to determine whether a user already has an existing cooldown
-            // If so, no need to check for (and write) new ones.
-            boolean cooldownFound = false;
-
-            for (final Entry<Pattern, Long> entry : user.getCommandCooldowns().entrySet()) {
-                // Remove any expired cooldowns
-                if (entry.getValue() <= System.currentTimeMillis()) {
-                    user.clearCommandCooldown(entry.getKey());
-                    // Don't break in case there are other command cooldowns left to clear.
-                } else if (entry.getKey().matcher(fullCommand).matches()) {
-                    // User's current cooldown hasn't expired, inform and terminate cooldown code.
-                    final String commandCooldownTime = DateUtil.formatDateDiff(entry.getValue());
-                    user.sendTl("commandCooldown", commandCooldownTime);
-                    cooldownFound = true;
-                    event.setCancelled(true);
-                }
-            }
-
-            if (!cooldownFound) {
-                final Entry<Pattern, Long> cooldownEntry = ess.getSettings().getCommandCooldownEntry(fullCommand);
-
-                if (cooldownEntry != null) {
-                    if (ess.getSettings().isDebug()) {
-                        ess.getLogger().info("Applying " + cooldownEntry.getValue() + "ms cooldown on /" + fullCommand + " for" + user.getName() + ".");
-                    }
-                    final Date expiry = new Date(System.currentTimeMillis() + cooldownEntry.getValue());
-                    user.addCommandCooldown(cooldownEntry.getKey(), expiry, ess.getSettings().isCommandCooldownPersistent(fullCommand));
-                }
-            }
-        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -1126,19 +1066,13 @@ public class EssentialsPlayerListener implements Listener {
     private static final class ArrowPickupListener implements Listener {
         @EventHandler(priority = EventPriority.LOW)
         public void onArrowPickup(final org.bukkit.event.player.PlayerPickupArrowEvent event) {
-            if (event.getItem().hasMetadata(Commandfireball.FIREBALL_META_KEY)) {
-                event.setCancelled(true);
-            }
+            // Fireball pickup disabled - fireball command removed
         }
     }
 
     private final class PickupListenerPre1_12 implements Listener {
         @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
         public void onPlayerPickupItem(final org.bukkit.event.player.PlayerPickupItemEvent event) {
-            if (event.getItem().hasMetadata(Commandfireball.FIREBALL_META_KEY)) {
-                event.setCancelled(true);
-                return;
-            }
             final User user = ess.getUser(event.getPlayer());
             if (user.isVanished() && !user.isAuthorizedCached("essentials.vanish.pickup")) {
                 event.setCancelled(true);

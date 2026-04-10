@@ -16,10 +16,10 @@ public final class PermissionsDefaults {
     
     public static void registerAllBackDefaults() {
         for (final World world : Bukkit.getWorlds()) {
-            registerBackDefaultFor(world);
+            registerDeathbackDefaultFor(world);
         }
     }
-    
+
     public static void registerDeathbackDefaultFor(final World w) {
         final String permName = "essentials.deathback.into." + w.getName();
 
@@ -30,6 +30,10 @@ public final class PermissionsDefaults {
                 PermissionDefault.TRUE);
             Bukkit.getPluginManager().addPermission(p);
         }
+    }
+
+    public static void registerBackDefaultFor(final World w) {
+        registerDeathbackDefaultFor(w);
     }
 
     public static void registerAllHatDefaults() {

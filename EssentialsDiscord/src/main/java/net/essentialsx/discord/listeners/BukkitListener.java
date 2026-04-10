@@ -65,36 +65,7 @@ public class BukkitListener implements Listener {
                         event.getSender() instanceof IUser ? ((IUser) event.getSender()).getBase() : null);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onMute(MuteStatusChangeEvent event) {
-        if (!event.getValue()) {
-            sendDiscordMessage(MessageType.DefaultTypes.MUTE,
-                    MessageUtil.formatMessage(jda.getSettings().getUnmuteFormat(),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getName()),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getDisplayName())));
-        } else if (event.getTimestamp().isPresent()) {
-            final boolean console = event.getController() == null;
-            final MessageFormat msg = event.getReason() == null ? jda.getSettings().getTempMuteFormat() : jda.getSettings().getTempMuteReasonFormat();
-            sendDiscordMessage(MessageType.DefaultTypes.MUTE,
-                    MessageUtil.formatMessage(msg,
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getName()),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getDisplayName()),
-                            MessageUtil.sanitizeDiscordMarkdown(console ? Console.NAME : event.getController().getName()),
-                            MessageUtil.sanitizeDiscordMarkdown(console ? Console.DISPLAY_NAME : event.getController().getDisplayName()),
-                            DateUtil.formatDateDiff(event.getTimestamp().get()),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getReason())));
-        } else {
-            final boolean console = event.getController() == null;
-            final MessageFormat msg = event.getReason() == null ? jda.getSettings().getPermMuteFormat() : jda.getSettings().getPermMuteReasonFormat();
-            sendDiscordMessage(MessageType.DefaultTypes.MUTE,
-                    MessageUtil.formatMessage(msg,
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getName()),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getDisplayName()),
-                            MessageUtil.sanitizeDiscordMarkdown(console ? Console.NAME : event.getController().getName()),
-                            MessageUtil.sanitizeDiscordMarkdown(console ? Console.DISPLAY_NAME : event.getController().getDisplayName()),
-                            MessageUtil.sanitizeDiscordMarkdown(event.getReason())));
-        }
-    }
+    // onMute method removed - moderation feature removed
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(AsyncUserDataLoadEvent event) {
@@ -191,25 +162,8 @@ public class BukkitListener implements Listener {
                 event.getEntity());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onAfk(AfkStatusChangeEvent event) {
-        if (isVanishHide(event.getAffected())) {
-            return;
-        }
-
-        final MessageFormat format;
-        if (event.getValue()) {
-            format = jda.getSettings().getAfkFormat(event.getAffected().getBase());
-        } else {
-            format = jda.getSettings().getUnAfkFormat(event.getAffected().getBase());
-        }
-
-        sendDiscordMessage(MessageType.DefaultTypes.AFK,
-                MessageUtil.formatMessage(format,
-                        MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getName()),
-                        MessageUtil.sanitizeDiscordMarkdown(event.getAffected().getDisplayName())),
-                event.getAffected().getBase());
-    }
+    // AFK feature removed - onAfk stub
+    // onAfk method removed - AFK feature removed
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onAdvancement(AbstractAchievementEvent event) {

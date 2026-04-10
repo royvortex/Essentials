@@ -276,4 +276,8 @@ public interface IUser {
     boolean isFreeze();
 
     void setFreeze(boolean freeze);
+
+    Player getBase();
+
+    CommandSource getSource();
 }

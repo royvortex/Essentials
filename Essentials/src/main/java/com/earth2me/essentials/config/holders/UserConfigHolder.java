@@ -166,6 +166,8 @@ public class UserConfigHolder {
         this.muted = value;
     }
 
+    private @Nullable String muteReason = null;
+
     public String muteReason() {
         return this.muteReason;
     }
@@ -173,6 +175,8 @@ public class UserConfigHolder {
     public void muteReason(final String value) {
         this.muteReason = value;
     }
+
+    private @Nullable String ipAddress = null;
 
     public String ipAddress() {
         return this.ipAddress;

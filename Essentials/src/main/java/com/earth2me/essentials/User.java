@@ -692,7 +692,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
         return hidden || isHiddenFrom(player);
     }
 
-    @Override
     public long getLastActivityTime() {
         return this.lastActivity;
     }
@@ -707,6 +706,22 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
 
     public void updateActivityOnInteract(final boolean broadcast) {
         lastActivity = System.currentTimeMillis();
+    }
+
+    public void updateActivityOnChat(final boolean broadcast) {
+        lastActivity = System.currentTimeMillis();
+    }
+
+    public void checkActivity() {
+        // Stub for activity tracking
+    }
+
+    public void checkMuteTimeout(final long currentTime) {
+        // Stub for mute timeout checking - moderation feature removed
+    }
+
+    public void checkJailTimeout(final long currentTime) {
+        // Stub for jail timeout checking - moderation feature removed
     }
 
     @Override
@@ -801,12 +816,10 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
         return isAuthorized("essentials.vanish.interact");
     }
 
-    @Override
     public boolean isIgnoreMsg() {
         return ignoreMsg;
     }
 
-    @Override
     public void setIgnoreMsg(final boolean ignoreMsg) {
         this.ignoreMsg = ignoreMsg;
     }
@@ -1051,6 +1064,22 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
     @Override
     public void setFreeze(boolean freeze) {
         this.freeze = freeze;
+    }
+
+    public boolean isAfk() {
+        return false;
+    }
+
+    public String getAfkMessage() {
+        return null;
+    }
+
+    public void setAfk(boolean afk) {
+        // AFK feature removed - stub only
+    }
+
+    public void setAfkMessage(String message) {
+        // AFK feature removed - stub only
     }
 
     public boolean isBaltopExempt() {

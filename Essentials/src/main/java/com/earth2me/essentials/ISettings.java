@@ -368,6 +368,28 @@ public interface ISettings extends IConf {
 
     int getBaltopEntryLimit();
 
+    Set<String> getNoGodWorlds();
+
+    boolean allowUnsafeEnchantments();
+
+    boolean getRepairEnchanted();
+
+    KeepInvPolicy getVanishingItemsPolicy();
+
+    KeepInvPolicy getBindingItemsPolicy();
+
+    boolean isWorldTeleportPermissions();
+
+    boolean isWorldHomePermissions();
+
+    boolean hasJoinQuitMessagePlayerCount();
+
+    int getJoinQuitMessagePlayerCount();
+
+    boolean registerBackInListener();
+
+    boolean getUpdateBedAtDaytime();
+
     enum KeepInvPolicy {
         KEEP,
         DELETE,

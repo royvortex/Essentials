@@ -4,7 +4,6 @@ import com.earth2me.essentials.config.ConfigurateUtil;
 import com.earth2me.essentials.config.EssentialsConfiguration;
 import com.earth2me.essentials.config.EssentialsUserConfiguration;
 import com.earth2me.essentials.config.entities.LazyLocation;
-import com.earth2me.essentials.craftbukkit.BanLookup;
 import com.earth2me.essentials.userstorage.ModernUUIDCache;
 import com.earth2me.essentials.utils.StringUtil;
 import com.google.common.base.Charsets;
@@ -155,38 +154,7 @@ public class EssentialsUpgrade {
     }
 
     private void updateRandomTeleport() {
-        if (doneFile.getBoolean("updateRandomTeleport", false)) {
-            return;
-        }
-
-        final EssentialsConfiguration config = ess.getRandomTeleport().getConfig();
-
-        if (config.getRootNode() != null) {
-            final LazyLocation center = config.getLocation("center");
-            final Location centerLoc = center != null ? center.location() : null;
-            if (center != null && centerLoc != null) {
-                final double minRange = config.getDouble("min-range", Double.MIN_VALUE);
-                final double maxRange = config.getDouble("max-range", Double.MIN_VALUE);
-                for (final World world : ess.getServer().getWorlds()) {
-                    final String propPrefix = "locations." + world.getName() + ".";
-                    config.setProperty(propPrefix + "center", centerLoc);
-
-                    if (minRange != Double.MIN_VALUE) {
-                        config.setProperty(propPrefix + "min-range", minRange);
-                    }
-                    if (maxRange != Double.MIN_VALUE) {
-                        config.setProperty(propPrefix + "max-range", maxRange);
-                    }
-                }
-            }
-            config.removeProperty("center");
-
-            config.blockingSave();
-        }
-
-        doneFile.setProperty("updateRandomTeleport", true);
-        doneFile.save();
-        ess.getLogger().info("Done converting random teleport config.");
+        // Random teleport feature removed
     }
 
     private void convertStupidCamelCaseUserdataKeys() {
@@ -836,9 +804,7 @@ public class EssentialsUpgrade {
                     banTimeout = 0L;
                 }
 
-                if (BanLookup.isBanned(ess, playerName)) {
-                    updateBan(playerName, banReason, banTimeout);
-                }
+                // BanLookup removed - moderation feature
             }
             conf.removeProperty("ban");
             conf.save();
@@ -1009,11 +975,9 @@ public class EssentialsUpgrade {
         deleteOldItemsCsv();
         updateSpawnsToNewSpawnsConfig();
         uuidFileChange();
-        banFormatChange();
         warnMetrics();
         convertIgnoreList();
         convertStupidCamelCaseUserdataKeys();
         purgeBrokenNpcAccounts();
-        updateRandomTeleport();
     }
 }

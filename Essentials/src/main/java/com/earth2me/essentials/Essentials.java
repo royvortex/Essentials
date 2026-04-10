@@ -52,7 +52,6 @@ import net.ess3.api.Economy;
 import com.earth2me.essentials.config.EssentialsConfiguration;
 import net.ess3.api.IEssentials;
 import net.ess3.api.IItemDb;
-import net.ess3.api.IJails;
 import net.ess3.api.ISettings;
 import net.ess3.api.TranslatableException;
 import net.ess3.nms.refl.providers.ReflDataWorldInfoProvider;
@@ -494,8 +493,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
         if (recipeBookEventProvider != null) {
             pm.registerEvents(recipeBookEventProvider, this);
         }
-
-        jails.resetListener();
     }
 
     @Override

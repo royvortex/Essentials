@@ -1200,12 +1200,10 @@ public class Settings implements net.ess3.api.ISettings {
         return config.getBoolean("disableSuffix", false);
     }
 
-    @Override
     public boolean disableSuffix() {
         return disableSuffix;
     }
 
-    @Override
     public long getAutoAfk() {
         return config.getLong("auto-afk", 300);
     }
@@ -1278,7 +1276,6 @@ public class Settings implements net.ess3.api.ISettings {
         return registerBackInListener;
     }
 
-    @Override
     public int getMaxTreeCommandRange() {
         return config.getInt("tree-command-range-limit", 300);
     }
@@ -1309,13 +1306,11 @@ public class Settings implements net.ess3.api.ISettings {
         return EventPriority.NORMAL;
     }
 
-    @Override
     public EventPriority getRespawnPriority() {
         final String priority = config.getString("respawn-listener-priority", "normal").toLowerCase(Locale.ENGLISH);
         return getPriority(priority);
     }
 
-    @Override
     public EventPriority getSpawnJoinPriority() {
         final String priority = config.getString("spawn-join-listener-priority", "normal").toLowerCase(Locale.ENGLISH);
         return getPriority(priority);
@@ -1766,6 +1761,21 @@ public class Settings implements net.ess3.api.ISettings {
         return commands;
     }
 
+    @Override
+    public List<String> getDefaultEnabledConfirmCommands() {
+        return _getDefaultEnabledConfirmCommands();
+    }
+
+    @Override
+    public boolean isConfirmCommandEnabledByDefault(String commandName) {
+        return _getDefaultEnabledConfirmCommands().contains(commandName.toLowerCase(Locale.ROOT));
+    }
+
+    @Override
+    public boolean isDirectHatAllowed() {
+        return config.getBoolean("allow-direct-hat", false);
+    }
+
     private TeleportWhenFreePolicy _getTeleportWhenFreePolicy() {
         if (config.hasProperty("teleport-back-when-freed-from-jail")) {
             return config.getBoolean("teleport-back-when-freed-from-jail", true) ? TeleportWhenFreePolicy.BACK : TeleportWhenFreePolicy.OFF;
@@ -1796,6 +1806,21 @@ public class Settings implements net.ess3.api.ISettings {
     @Override
     public boolean isCompassTowardsHomePerm() {
         return isCompassTowardsHomePerm;
+    }
+
+    @Override
+    public int getMotdDelay() {
+        return config.getInt("motd-delay", 0);
+    }
+
+    @Override
+    public boolean isAddingPrefixInPlayerlist() {
+        return config.getBoolean("add-prefix-in-playerlist", true);
+    }
+
+    @Override
+    public boolean isAddingSuffixInPlayerlist() {
+        return config.getBoolean("add-suffix-in-playerlist", true);
     }
 
     private boolean _isAllowWorldInBroadcastworld() {
