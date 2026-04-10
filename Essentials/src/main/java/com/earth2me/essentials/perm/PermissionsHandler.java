@@ -248,16 +248,7 @@ public class PermissionsHandler implements IPermissionsHandler {
 
     private void initContexts() {
         registerContext("essentials:afk", user -> Collections.singleton(String.valueOf(user.isAfk())), () -> ImmutableSet.of("true", "false"));
-        registerContext("essentials:muted", user -> Collections.singleton(String.valueOf(user.isMuted())), () -> ImmutableSet.of("true", "false"));
         registerContext("essentials:vanished", user -> Collections.singleton(String.valueOf(user.isHidden())), () -> ImmutableSet.of("true", "false"));
-        registerContext("essentials:jailed", user -> Collections.singleton(String.valueOf(user.isJailed())), () -> ImmutableSet.of("true", "false"));
-        registerContext("essentials:jail", user -> Optional.ofNullable(user.getJail()).map(Arrays::asList).orElse(Collections.emptyList()), () -> {
-            try {
-                return ess.getJails().getList();
-            } catch (final Exception e) {
-                return Collections.emptyList();
-            }
-        });
     }
 
 }

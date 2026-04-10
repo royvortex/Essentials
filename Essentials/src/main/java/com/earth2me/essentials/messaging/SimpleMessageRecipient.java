@@ -128,11 +128,7 @@ public class SimpleMessageRecipient implements IMessageRecipient {
                                     // Don't send socialspy messages to message sender/receiver to prevent spam
                                     && !onlineUser.equals(senderUser)
                                     && !onlineUser.equals(recipient)) {
-                                if (senderUser.isMuted() && ess.getSettings().getSocialSpyListenMutedPlayers()) {
-                                    onlineUser.sendComponent(ess.getAdventureFacet().deserializeMiniMessage(tlSender("socialSpyMutedPrefix") + tlLiteral("socialSpyMsgFormat", senderName, recipientName, message)));
-                                } else {
-                                    onlineUser.sendComponent(ess.getAdventureFacet().deserializeMiniMessage(tlLiteral("socialSpyPrefix") + tlLiteral("socialSpyMsgFormat", senderName, recipientName, message)));
-                                }
+                                onlineUser.sendComponent(ess.getAdventureFacet().deserializeMiniMessage(tlLiteral("socialSpyPrefix") + tlLiteral("socialSpyMsgFormat", senderName, recipientName, message)));
                             }
                         }
                     }

@@ -191,26 +191,6 @@ public class EssentialsPlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(final AsyncPlayerChatEvent event) {
         final User user = ess.getUser(event.getPlayer());
-        if (user.isMuted()) {
-            event.setCancelled(true);
-
-            final String dateDiff = user.getMuteTimeout() > 0 ? DateUtil.formatDateDiff(user.getMuteTimeout()) : null;
-            if (dateDiff == null) {
-                if (user.hasMuteReason()) {
-                    user.sendTl("voiceSilencedReason", user.getMuteReason());
-                } else {
-                    user.sendTl("voiceSilenced");
-                }
-            } else {
-                if (user.hasMuteReason()) {
-                    user.sendTl("voiceSilencedReasonTime", dateDiff, user.getMuteReason());
-                } else {
-                    user.sendTl("voiceSilencedTime", dateDiff);
-                }
-            }
-
-            ess.getLogger().info(ess.getAdventureFacet().miniToLegacy(tlLiteral("mutedUserSpeaks", user.getName(), event.getMessage())));
-        }
         try {
             final Iterator<Player> it = event.getRecipients().iterator();
             while (it.hasNext()) {
@@ -795,12 +775,9 @@ public class EssentialsPlayerListener implements Listener {
                     final String playerName = ess.getSettings().isSocialSpyDisplayNames() ? player.getDisplayName() : player.getName();
                     for (final User spyer : ess.getOnlineUsers()) {
                         if (spyer.isSocialSpyEnabled() && !player.equals(spyer.getBase())) {
-                            final ComponentHolder base = (user.isMuted() && ess.getSettings().getSocialSpyListenMutedPlayers())
-                                    ? spyer.tlComponent("socialSpyMutedPrefix")
-                                    : spyer.tlComponent("socialSpyPrefix");
                             final ComponentHolder formatted = ess.getAdventureFacet().deserializeMiniMessage(spyer.playerTl("socialSpyCmdFormat", playerName, event.getMessage()));
 
-                            spyer.sendComponent(ess.getAdventureFacet().append(base, formatted));
+                            spyer.sendComponent(ess.getAdventureFacet().append(spyer.tlComponent("socialSpyPrefix"), formatted));
                         }
                     }
                 }
@@ -808,25 +785,7 @@ public class EssentialsPlayerListener implements Listener {
         }
 
         final User user = ess.getUser(player);
-        if (user.isMuted() && (ess.getSettings().getMuteCommands().contains(cmd) || ess.getSettings().getMuteCommands().contains("*"))) {
-            event.setCancelled(true);
-            final String dateDiff = user.getMuteTimeout() > 0 ? DateUtil.formatDateDiff(user.getMuteTimeout()) : null;
-            if (dateDiff == null) {
-                if (user.hasMuteReason()) {
-                    user.sendTl("voiceSilencedReason", user.getMuteReason());
-                } else {
-                    user.sendTl("voiceSilenced");
-                }
-            } else {
-                if (user.hasMuteReason()) {
-                    user.sendTl("voiceSilencedReasonTime", dateDiff, user.getMuteReason());
-                } else {
-                    user.sendTl("voiceSilencedTime", dateDiff);
-                }
-            }
-            ess.getLogger().info(ess.getAdventureFacet().miniToLegacy(tlLiteral("mutedUserSpeaks", player.getName(), event.getMessage())));
-            return;
-        }
+        return;
 
         boolean broadcast = true; // whether to broadcast the updated activity
         boolean update = true; // Only modified when the command is afk

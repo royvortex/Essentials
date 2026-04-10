@@ -19,8 +19,6 @@ import net.ess3.api.IEssentials;
 import net.ess3.api.MaxMoneyException;
 import net.ess3.api.TranslatableException;
 import net.ess3.api.events.AfkStatusChangeEvent;
-import net.ess3.api.events.JailStatusChangeEvent;
-import net.ess3.api.events.MuteStatusChangeEvent;
 import net.ess3.api.events.UserBalanceUpdateEvent;
 import net.ess3.provider.PlayerLocaleProvider;
 import net.essentialsx.api.v2.events.PreTransactionEvent;
@@ -752,71 +750,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
 
     public boolean isHidden(final Player player) {
         return hidden || isHiddenFrom(player);
-    }
-
-    @Override
-    public String getFormattedJailTime() {
-        return DateUtil.formatDateDiff(getOnlineJailedTime() > 0 ? getOnlineJailExpireTime() : getJailTimeout());
-    }
-
-    private long getOnlineJailExpireTime() {
-        return ((getOnlineJailedTime() - getBase().getStatistic(PLAY_ONE_TICK)) * 50) + System.currentTimeMillis();
-    }
-
-    //Returns true if status expired during this check
-    @SuppressWarnings("UnusedReturnValue")
-    public boolean checkJailTimeout(final long currentTime) {
-        if (getJailTimeout() > 0) {
-
-            if (getOnlineJailedTime() > 0) {
-                if (getOnlineJailedTime() > getBase().getStatistic(PLAY_ONE_TICK)) {
-                    return false;
-                }
-            }
-
-            if (getJailTimeout() < currentTime && isJailed()) {
-                final JailStatusChangeEvent event = new JailStatusChangeEvent(this, null, false);
-                ess.getServer().getPluginManager().callEvent(event);
-
-                if (!event.isCancelled()) {
-                    setJailTimeout(0);
-                    setOnlineJailedTime(0);
-                    setJailed(false);
-                    sendTl("haveBeenReleased");
-                    setJail(null);
-                    if (ess.getSettings().getTeleportWhenFreePolicy() == ISettings.TeleportWhenFreePolicy.BACK) {
-                        final CompletableFuture<Boolean> future = new CompletableFuture<>();
-                        getAsyncTeleport().back(future);
-                        future.exceptionally(e -> {
-                            getAsyncTeleport().respawn(null, TeleportCause.PLUGIN, new CompletableFuture<>());
-                            return false;
-                        });
-                    } else if (ess.getSettings().getTeleportWhenFreePolicy() == ISettings.TeleportWhenFreePolicy.SPAWN) {
-                        getAsyncTeleport().respawn(null, TeleportCause.PLUGIN, new CompletableFuture<>());
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    //Returns true if status expired during this check
-    @SuppressWarnings("UnusedReturnValue")
-    public boolean checkMuteTimeout(final long currentTime) {
-        if (getMuteTimeout() > 0 && getMuteTimeout() < currentTime && isMuted()) {
-            final MuteStatusChangeEvent event = new MuteStatusChangeEvent(this, null, false, getMuteTimeout(), getMuteReason());
-            ess.getServer().getPluginManager().callEvent(event);
-
-            if (!event.isCancelled()) {
-                setMuteTimeout(0);
-                sendTl("canTalkAgain");
-                setMuted(false);
-                setMuteReason(null);
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

@@ -71,8 +71,6 @@ public interface ISettings extends IConf {
 
     Set<String> getSocialSpyCommands();
 
-    boolean getSocialSpyListenMutedPlayers();
-
     boolean isSocialSpyMessages();
 
     boolean isSocialSpyDisplayNames();

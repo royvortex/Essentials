@@ -319,15 +319,6 @@ public abstract class UserData extends PlayerExtension implements IConf {
         config.save();
     }
 
-    public String getJail() {
-        return holder.jail();
-    }
-
-    public void setJail(final String jail) {
-        holder.jail(jail);
-        config.save();
-    }
-
     public boolean isTeleportEnabled() {
         return holder.teleportEnabled();
     }
@@ -408,74 +399,6 @@ public abstract class UserData extends PlayerExtension implements IConf {
 
     public void setFlyModeEnabled(final boolean set) {
         holder.flyMode(set);
-        config.save();
-    }
-
-    public boolean getMuted() {
-        return holder.muted();
-    }
-
-    public boolean isMuted() {
-        return getMuted();
-    }
-
-    public void setMuted(final boolean set) {
-        holder.muted(set);
-        config.save();
-    }
-
-    public String getMuteReason() {
-        return holder.muteReason();
-    }
-
-    public void setMuteReason(final String reason) {
-        holder.muteReason(reason);
-        config.save();
-    }
-
-    public boolean hasMuteReason() {
-        return holder.muteReason() != null;
-    }
-
-    public long getMuteTimeout() {
-        return holder.timestamps().mute();
-    }
-
-    public void setMuteTimeout(final long time) {
-        holder.timestamps().mute(time);
-        config.save();
-    }
-
-    public boolean isJailed() {
-        return holder.jailed();
-    }
-
-    public void setJailed(final boolean set) {
-        holder.jailed(set);
-        config.save();
-    }
-
-    public boolean toggleJailed() {
-        final boolean ret = !isJailed();
-        setJailed(ret);
-        return ret;
-    }
-
-    public long getJailTimeout() {
-        return holder.timestamps().jail();
-    }
-
-    public void setJailTimeout(final long time) {
-        holder.timestamps().jail(time);
-        config.save();
-    }
-
-    public long getOnlineJailedTime() {
-        return holder.timestamps().onlineJail();
-    }
-
-    public void setOnlineJailedTime(long onlineJailed) {
-        holder.timestamps().onlineJail(onlineJailed);
         config.save();
     }
 

@@ -677,10 +677,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
                 return Collections.emptyList();
             }
 
-            if (user != null && user.isJailed() && !user.isAuthorized(cmd, "essentials.jail.allow.")) {
-                return Collections.emptyList();
-            }
-
             // Run the command
             try {
                 if (user == null) {
@@ -784,15 +780,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             if (user != null && !user.isAuthorized(cmd, permissionPrefix)) {
                 LOGGER.log(Level.INFO, getAdventureFacet().miniToLegacy(tlLiteral("deniedAccessCommand", user.getName())));
                 user.sendTl("noAccessCommand");
-                return true;
-            }
-
-            if (user != null && user.isJailed() && !user.isAuthorized(cmd, "essentials.jail.allow.")) {
-                if (user.getJailTimeout() > 0) {
-                    user.sendTl("playerJailedFor", user.getName(), user.getFormattedJailTime());
-                } else {
-                    user.sendTl("jailMessage");
-                }
                 return true;
             }
 

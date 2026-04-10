@@ -471,11 +471,6 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
-    public boolean getSocialSpyListenMutedPlayers() {
-        return config.getBoolean("socialspy-listen-muted-players", true);
-    }
-
-    @Override
     public boolean isSocialSpyMessages() {
         return config.getBoolean("socialspy-messages", true);
     }
