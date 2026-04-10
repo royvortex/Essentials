@@ -230,18 +230,6 @@ commands:
     description: Adds custom potion effects to a potion.
     usage: /<command> <clear|apply|effect:<effect> power:<power> duration:<duration>>
     aliases: [epotion,elixer,eelixer]
-  powertool:
-    description: Assigns a command to the item in hand.
-    usage: /<command> [l:|a:|r:|c:|d:][command] [arguments] - {player} can be replaced by name of a clicked player.
-    aliases: [epowertool,pt,ept]
-  powertoollist:
-    description: Lists all current powertools.
-    usage: /<command>
-    aliases: [epowertoollist,ptlist,eptlist]
-  powertooltoggle:
-    description: Enables or disables all current powertools.
-    usage: /<command>
-    aliases: [epowertooltoggle,ptt,eptt,pttoggle,epttoggle]
   ptime:
     description: Adjust player's client time. Add @ prefix to fix.
     usage: /<command> [list|reset|day|night|dawn|17:30|4pm|4000ticks] [player|*]
@@ -738,14 +726,6 @@ permissions:
     description: Allows access to the /potion command for a specific potion type
   essentials.potion.apply:
     description: Allows access to the /potion apply command
-  essentials.powertool:
-    description: Allows access to the /powertool command
-  essentials.powertool.append:
-    description: Allows access to add multiple commands to a powertool
-  essentials.powertoollist:
-    description: Allows access to the /powertoollist command
-  essentials.powertooltoggle:
-    description: Allows access to the /powertooltoggle command
   essentials.ptime:
     description: Allows access to the /ptime command
   essentials.ptime.others:
