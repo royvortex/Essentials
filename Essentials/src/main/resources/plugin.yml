@@ -106,10 +106,6 @@ commands:
     description: Give, set, reset, or look at a players experience.
     usage: /<command> [reset|show|set|give] [playername [amount]]
     aliases: [eexp,xp]
-  ext:
-    description: Extinguish players.
-    usage: /<command> [player]
-    aliases: [eext,extinguish,eextinguish]
   feed:
     description: Satisfy the hunger.
     usage: /<command> [player]
@@ -162,10 +158,6 @@ commands:
     description: Teleport to your home.
     usage: /<command> [player:][name]
     aliases: [ehome,homes,ehomes]
-  ice:
-    description: Cools a player off.
-    usage: /<command> [player]
-    aliases: [eice, efreeze]
   ignore:
     description: Ignore or unignore other players.
     usage: /<command> <player>
@@ -174,10 +166,6 @@ commands:
     description: Shows information set by the server owner.
     usage: /<command> [chapter] [page]
     aliases: [about,eabout,ifo,eifo,einfo,inform,einform,news,enews]
-  jump:
-    description: Jumps to the nearest block in the line of sight.
-    usage: /<command>
-    aliases: [j,ej,ejump,jumpto,ejumpto]
   kill:
     description: Kills specified player.
     usage: /<command> <player>
@@ -238,14 +226,6 @@ commands:
     description: Toggles whether you are prompted to confirm payments.
     usage: /<command>
     aliases: [epayconfirmtoggle, payconfirmoff, epayconfirmoff, payconfirmon, epayconfirmon, payconfirm, epayconfirm]
-  ping:
-    description: Pong!
-    usage: /<command>
-    aliases: [echo,eecho,eping,pong,epong]
-  playtime:
-    description: Shows a player's time played in game
-    usage: /<command> [player]
-    aliases: [eplaytime]
   potion:
     description: Adds custom potion effects to a potion.
     usage: /<command> <clear|apply|effect:<effect> power:<power> duration:<duration>>
@@ -559,10 +539,6 @@ permissions:
     description: Allows the bearer to set experience for themselves
   essentials.exp.set.others:
     description: Allows the bearer to set experience for other players
-  essentials.ext:
-    description: Allows access to the /ext command
-  essentials.ext.others:
-    description: Allows access to the /ext command for other players
   essentials.feed:
     description: Allows access to the /feed command
   essentials.feed.others:
@@ -648,10 +624,6 @@ permissions:
     description: Allows access to teleport to other players homes with the /home command
   essentials.home.bed:
     description: Allows access to the /home command for beds
-  essentials.ice:
-    description: Allows access to the /ice command
-  essentials.ice.others:
-    description: Allows access to the /ice command for other players
   essentials.ignore:
     description: Allows access to the /ignore command
   essentials.info:
@@ -672,10 +644,6 @@ permissions:
     description: Allows the bearer to spawn items with lore metadata
   essentials.itemspawn.meta-title:
     description: Allows the bearer to spawn items with title metadata
-  essentials.jump:
-    description: Allows access to the /jump command
-  essentials.jump.lock:
-    description: Allows access to the /jump lock command
   essentials.keepxp:
     default: false
     description: Allows the user to keep their exp on death, instead of dropping it.
@@ -764,8 +732,6 @@ permissions:
     description: Allows access to the /payconfirmtoggle command
   essentials.paytoggle:
     description: Allows access to the /paytoggle command
-  essentials.ping:
-    description: Allows access to the /ping command
   essentials.potion:
     description: Allows access to the /potion command
   essentials.potion.<potion-type>:
@@ -1100,10 +1066,6 @@ permissions:
   essentials.keepinv:
     default: false
     description: Controls whether players keep their inventory on death.
-  essentials.playtime:
-    description: Allows access to the /playtime command
-  essentials.playtime.others:
-    description: Allows access to the /playtime command for other players
   # These permissions can't be assigned from player-commands for compatibility reasons
   essentials.teleport.cooldown.bypass.tpa:
     default: true
