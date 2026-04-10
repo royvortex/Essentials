@@ -174,7 +174,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private transient MetricsWrapper metrics;
     private transient EssentialsTimer timer;
     private transient ProviderListener recipeBookEventProvider;
-    private transient RandomTeleport randomTeleport;
     private transient UpdateChecker updateChecker;
     private transient AdventureFacet adventureFacet;
 
