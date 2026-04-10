@@ -151,18 +151,6 @@ commands:
     description: Opens up a loom.
     usage: /<command>
     aliases: [eloom]
-  me:
-    description: Describes an action in the context of the player.
-    usage: /<command> <description>
-    aliases: [action,eaction,describe,edescribe,eme]
-  more:
-    description: Fills the item stack in hand to specified amount, or to maximum size if none is specified.
-    usage: /<command> [amount]
-    aliases: [emore]
-  motd:
-    description: Views the Message Of The Day.
-    usage: /<command> [chapter] [page]
-    aliases: [emotd]
   msg:
     description: Sends a private message to the specified player.
     usage: /<command> <to> <message>
@@ -175,10 +163,6 @@ commands:
     description: Lists the players near by or around a player.
     usage: /<command> [playername] [radius]
     aliases: [enear,nearby,enearby]
-  nuke:
-    description: May death rain upon them.
-    usage: /<command> [player]
-    aliases: [enuke]
   tpoffline:
     description: Teleport to a player's last known logout location
     usage: /<command> <player>
@@ -540,12 +524,6 @@ permissions:
     description: Allows access to the /list command
   essentials.list.hidden:
     description: Allow access to view hidden players in the /list command
-  essentials.me:
-    description: Allows access to the /me command
-  essentials.more:
-    description: Allows access to the /more command
-  essentials.motd:
-    description: Allows access to the /motd command
   essentials.msg:
     description: Allows access to the /msg command
   essentials.msg.format:
@@ -582,8 +560,6 @@ permissions:
     description: Allows the bearer to use all commands without cost
   essentials.nocommandcost.<command>:
     description: Allows the bearer to use the specified command without cost
-  essentials.nuke:
-    description: Allows access to the /nuke command
   essentials.oversizedstacks:
     description: Allows the bearer to spawn oversized stacks
   essentials.pay:
