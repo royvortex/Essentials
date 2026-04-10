@@ -122,10 +122,6 @@ commands:
     description: Reports memory, uptime and tick info.
     usage: /<command>
     aliases: [lag,elag,egc,mem,emem,memory,ememory,uptime,euptime,tps,etps,entities,eentities]
-  getpos:
-    description: Get your current coordinates or those of a player.
-    usage: /<command> [player]
-    aliases: [coords,egetpos,position,eposition,whereami,ewhereami,getlocation,egetlocation,getloc,egetloc]
   give:
     description: Give a player an item.
     usage: /<command> <player> <item|numeric> [amount [itemmeta...]]
@@ -266,14 +262,6 @@ commands:
     description: Repairs the durability of one or all items.
     usage: /<command> [hand|all]
     aliases: [fix,efix,erepair]
-  rest:
-    description: Rests you or the given player.
-    usage: /<command> [player]
-    aliases: [erest]
-  rules:
-    description: Views the server rules.
-    usage: /<command> [chapter] [page]
-    aliases: [erules]
   sethome:
     description: Set your home to your current location.
     usage: /<command> [[player:]name]
@@ -286,10 +274,6 @@ commands:
     description: Creates a new warp.
     usage: /<command> <warp>
     aliases: [createwarp,ecreatewarp,esetwarp]
-  editsign:
-    description: Edits a sign in the world.
-    usage: /<command> <set/clear/copy/paste> [line number] [text]
-    aliases: [sign, esign, eeditsign]
   smithingtable:
     description: Opens up a smithing table.
     usage: /<command>
@@ -298,10 +282,6 @@ commands:
     description: Toggles if you can see msg/mail commands in chat.
     usage: /<command> [player] [on|off]
     aliases: [esocialspy]
-  spawner:
-    description: Change the mob type of a spawner.
-    usage: /<command> <mob> [delay]
-    aliases: [changems,echangems,espawner,mobspawner,emobspawner]
   spawnmob:
     description: Spawns a mob.
     usage: /<command> <mob>[:data][,<mount>[:data]] [amount] [player]
@@ -390,10 +370,6 @@ commands:
     description: Blocks all forms of teleportation.
     usage: /<command> [player] [on|off]
     aliases: [etptoggle]
-  unlimited:
-    description: Allows the unlimited placing of items.
-    usage: /<command> <list|item|clear> [player]
-    aliases: [eunlimited,ul,unl,eul,eunl]
   vanish:
     description: Hide yourself from other players.
     usage: /<command> [player] [on|off]
@@ -561,10 +537,6 @@ permissions:
       essentials.gamemode.all: true
   essentials.gc:
     description: Allows access to the /gc command
-  essentials.getpos:
-    description: Allows access to the /getpos command
-  essentials.getpos.others:
-    description: Allows access to the /getpos command for other players
   essentials.give:
     description: Allows access to the /give command
   essentials.give.item-all:
@@ -752,12 +724,8 @@ permissions:
     description: Allows access to the /repair armor command
   essentials.repair.enchanted:
     description: Allows access to use the /repair command on enchanted items
-  essentials.rest:
-    description: Allows access to the /rest command
-  essentials.rest.others:
+  essentials.review:
     description: Allows access to the /rest command for other players
-  essentials.rules:
-    description: Allows access to the /rules command
   essentials.setwarp:
     description: Allows access to the /setwarp command
   essentials.signs.enchant.allowunsafe:
@@ -783,14 +751,6 @@ permissions:
     description: Allows access to the /socialspy command
   essentials.socialspy.others:
     description: Allows access to the /socialspy command for other players
-  essentials.spawner:
-    description: Allows access to the /spawner command
-  essentials.spawner.delay:
-    description: Allows access to set the delay of a spawner with the /spawner command
-  essentials.spawner.*:
-    description: Allows access to set the type of a spawner with the /spawner command to all types
-  essentials.spawner.<mob-type>:
-    description: Allows access to set the type of a spawner with the /spawner command to a specific type
   essentials.spawnerconvert.*:
     description: Allows the bearer to place spawners of any type
   essentials.spawnerconvert.<mob-type>:
@@ -878,16 +838,6 @@ permissions:
     description: Allows access to the /tptoggle command for other players
   essentials.settpr:
     description: Allows access to the /settpr command
-  essentials.unlimited:
-    description: Allows access to the /unlimited command
-  essentials.unlimited.item-all:
-    description: Allows access to the /unlimited command for all items when permission-based-item-spawn is enabled
-  essentials.unlimited.item-<item-name>:
-    description: Allows access to the /unlimited command for a specific item when permission-based-item-spawn is enabled
-  essentials.unlimited.item-bucket:
-    description: Allows access to the /unlimited command for buckets of water and lava
-  essentials.unlimited.others:
-    description: Allows access to the /unlimited command for other players
   essentials.vanish:
     description: Allows access to the /vanish command
   essentials.vanish.others:
@@ -1031,18 +981,6 @@ permissions:
     description: Allows the bearer to create weather signs
   essentials.editsign:
     description: Allows access to the /editsign command
-  essentials.editsign.unlimited:
-    description: Allows the bearer to exceed the 15 character limit on signs
-  essentials.editsign.color:
-    description: Allows the bearer to use color codes on signs
-  essentials.editsign.format:
-    description: Allows the bearer to use formatting codes on signs
-  essentials.editsign.magic:
-    description: Allows the bearer to use magic codes on signs
-  essentials.editsign.rgb:
-    description: Allows the bearer to use RGB codes on signs
-  essentials.editsign.waxed.exempt:
-    description: Allows the bearer to edit waxed signs
   essentials.keepinv:
     default: false
     description: Controls whether players keep their inventory on death.
