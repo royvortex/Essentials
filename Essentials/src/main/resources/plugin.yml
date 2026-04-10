@@ -123,10 +123,6 @@ commands:
     description: Views a list of available commands.
     usage: /<command> [search term] [page]
     aliases: [ehelp]
-  helpop:
-    description: Message online admins.
-    usage: /<command> <message>
-    aliases: [ac,eac,amsg,eamsg,ehelpop]
   home:
     description: Teleport to your home.
     usage: /<command> [player:][name]
@@ -472,10 +468,6 @@ permissions:
     description: Allows access to the /help command
   essentials.help.<plugin-name>:
     description: Allows access to the /help command for a specific plugin
-  essentials.helpop:
-    description: Allows access to the /helpop command
-  essentials.helpop.receive:
-    description: Allows the bearer to receive helpop messages
   essentials.kill:
     description: Allows access to the /kill command
   essentials.kill.exempt:
