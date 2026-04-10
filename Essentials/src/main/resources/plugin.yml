@@ -462,10 +462,6 @@ commands:
     description: Teleport to coordinates.
     usage: /<command> <x> <y> <z> [yaw] [pitch] [world]
     aliases: [etppos]
-  tpr:
-    description: Teleport randomly.
-    usage: /<command>
-    aliases: [etpr, tprandom, etprandom]
   tptoggle:
     description: Blocks all forms of teleportation.
     usage: /<command> [player] [on|off]
@@ -1045,8 +1041,6 @@ permissions:
     description: Allows access to the /tptoggle command
   essentials.tptoggle.others:
     description: Allows access to the /tptoggle command for other players
-  essentials.tpr:
-    description: Allows access to the /tpr command
   essentials.settpr:
     description: Allows access to the /settpr command
   essentials.unlimited:
