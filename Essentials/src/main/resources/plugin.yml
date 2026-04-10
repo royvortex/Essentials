@@ -60,10 +60,6 @@ commands:
     description: Broadcasts a message to a world.
     usage: /<command> <world> <msg>
     aliases: [bcw,ebcw,bcastw,ebcastw,ebroadcastworld,shoutworld,eshoutworld]
-  bigtree:
-    description: Spawn a big tree where you are looking.
-    usage: /<command> <tree|redwood|jungle|darkoak>
-    aliases: [ebigtree,largetree,elargetree]
   burn:
     description: Set a player on fire.
     usage: /<command> <player> <seconds>
@@ -487,10 +483,6 @@ commands:
     description: Blocks all forms of teleportation.
     usage: /<command> [player] [on|off]
     aliases: [etptoggle]
-  tree:
-    description: Spawn a tree where you are looking.
-    usage: /<command> <tree|birch|redwood|redmushroom|brownmushroom|jungle|junglebush|swamp>
-    aliases: [etree]
   unlimited:
     description: Allows the unlimited placing of items.
     usage: /<command> <list|item|clear> [player]
@@ -568,8 +560,6 @@ permissions:
   essentials.balancetop.exclude:
     default: false
     description: Players with this permission are excluded from the balancetop
-  essentials.bigtree:
-    description: Allows access to the /bigtree command
   essentials.book:
     description: Allows access to the /book command
   essentials.book.author:
@@ -1089,8 +1079,6 @@ permissions:
     description: Allows access to the /tpr command
   essentials.settpr:
     description: Allows access to the /settpr command
-  essentials.tree:
-    description: Allows access to the /tree command
   essentials.unlimited:
     description: Allows access to the /unlimited command
   essentials.unlimited.item-all:
