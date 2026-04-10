@@ -18,7 +18,6 @@ import com.google.common.collect.Lists;
 import net.ess3.api.IEssentials;
 import net.ess3.api.MaxMoneyException;
 import net.ess3.api.TranslatableException;
-import net.ess3.api.events.AfkStatusChangeEvent;
 import net.ess3.api.events.UserBalanceUpdateEvent;
 import net.ess3.provider.PlayerLocaleProvider;
 import net.essentialsx.api.v2.events.PreTransactionEvent;
@@ -80,11 +79,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
     private boolean ignoreMsg = false;
     private Boolean toggleShout;
     private boolean freeze = false;
-
-    // User afk variables
-    private String afkMessage;
-    private long afkSince;
-    private transient Location afkPosition = null;
 
     // Timestamps
     private transient long lastOnlineActivity;

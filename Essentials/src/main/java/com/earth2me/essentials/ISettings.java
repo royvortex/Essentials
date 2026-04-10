@@ -196,61 +196,9 @@ public interface ISettings extends IConf {
 
     boolean disableSuffix();
 
-    long getAutoAfk();
-
-    long getAutoAfkTimeout();
-
-    List<String> getAfkTimeoutCommands();
-
-    boolean getFreezeAfkPlayers();
-
-    boolean cancelAfkOnMove();
-
-    boolean cancelAfkOnInteract();
-
-    boolean cancelAfkOnChat();
-
-    boolean cancelAfkOnFish();
-
-    boolean sleepIgnoresAfkPlayers();
-
     boolean sleepIgnoresVanishedPlayers();
 
-    boolean isAfkListName();
-
-    String getAfkListName();
-
-    boolean broadcastAfkMessage();
-
     boolean areDeathMessagesEnabled();
-
-    KeepInvPolicy getVanishingItemsPolicy();
-
-    KeepInvPolicy getBindingItemsPolicy();
-
-    int getJoinQuitMessagePlayerCount();
-
-    boolean hasJoinQuitMessagePlayerCount();
-
-    Set<String> getNoGodWorlds();
-
-    boolean getUpdateBedAtDaytime();
-
-    boolean allowUnsafeEnchantments();
-
-    boolean getRepairEnchanted();
-
-    boolean isWorldTeleportPermissions();
-
-    boolean isWorldHomePermissions();
-
-    int getMaxTreeCommandRange();
-
-    boolean registerBackInListener();
-
-    boolean getDisableItemPickupWhileAfk();
-
-    EventPriority getRespawnPriority();
 
     EventPriority getSpawnJoinPriority();
 

@@ -102,18 +102,10 @@ public class Settings implements net.ess3.api.ISettings {
     private boolean disablePrefix = false;
     // #easteregg
     private boolean disableSuffix = false;
-    private boolean getFreezeAfkPlayers;
-    private boolean cancelAfkOnMove;
-    private boolean cancelAfkOnInteract;
-    private boolean sleepIgnoresAfkPlayers;
-    private String afkListName;
-    private boolean isAfkListName;
-    private boolean broadcastAfkMessage;
     private KeepInvPolicy vanishingItemPolicy;
     private KeepInvPolicy bindingItemPolicy;
     private Set<String> noGodWorlds = new HashSet<>();
     private boolean registerBackInListener;
-    private boolean disableItemPickupWhileAfk;
     private long teleportInvulnerabilityTime;
     private boolean teleportInvulnerability;
     private long loginAttackDelay;
@@ -151,7 +143,6 @@ public class Settings implements net.ess3.api.ISettings {
     private String secondaryColor = DEFAULT_SECONDARY_COLOR;
     private Set<String> multiplierPerms;
     private BigDecimal defaultMultiplier;
-    private List<String> afkTimeoutCommands = Collections.emptyList();
 
     public Settings(final IEssentials ess) {
         this.ess = ess;
@@ -763,15 +754,7 @@ public class Settings implements net.ess3.api.ISettings {
         forceDisableTeleportSafety = _isForceDisableTeleportSafety();
         teleportInvulnerabilityTime = _getTeleportInvulnerability();
         teleportInvulnerability = _isTeleportInvulnerability();
-        disableItemPickupWhileAfk = _getDisableItemPickupWhileAfk();
         registerBackInListener = _registerBackInListener();
-        cancelAfkOnInteract = _cancelAfkOnInteract();
-        cancelAfkOnMove = _cancelAfkOnMove();
-        getFreezeAfkPlayers = _getFreezeAfkPlayers();
-        sleepIgnoresAfkPlayers = _sleepIgnoresAfkPlayers();
-        afkListName = _getAfkListName();
-        isAfkListName = afkListName != null && !afkListName.equalsIgnoreCase("none");
-        broadcastAfkMessage = _broadcastAfkMessage();
         itemSpawnBl = _getItemSpawnBlacklist();
         loginAttackDelay = _getLoginAttackDelay();
         signUsePerSecond = _getSignUsePerSecond();
@@ -900,7 +883,6 @@ public class Settings implements net.ess3.api.ISettings {
         secondaryColor = _getSecondaryColor();
         multiplierPerms = _getMultiplierPerms();
         defaultMultiplier = _getDefaultMultiplier();
-        afkTimeoutCommands = _getAfkTimeoutCommands();
 
         reloadCount.incrementAndGet();
     }
@@ -1233,91 +1215,8 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
-    public long getAutoAfkTimeout() {
-        return config.getLong("auto-afk-timeout", config.getLong("auto-afk-kick", -1));
-    }
-
-    private List<String> _getAfkTimeoutCommands() {
-        return new ArrayList<>(config.getList("afk-timeout-commands", String.class));
-    }
-
-    @Override
-    public List<String> getAfkTimeoutCommands() {
-        return afkTimeoutCommands;
-    }
-
-    @Override
-    public boolean getFreezeAfkPlayers() {
-        return getFreezeAfkPlayers;
-    }
-
-    private boolean _getFreezeAfkPlayers() {
-        return config.getBoolean("freeze-afk-players", false);
-    }
-
-    @Override
-    public boolean cancelAfkOnMove() {
-        return cancelAfkOnMove;
-    }
-
-    private boolean _cancelAfkOnMove() {
-        return config.getBoolean("cancel-afk-on-move", true);
-    }
-
-    @Override
-    public boolean cancelAfkOnInteract() {
-        return cancelAfkOnInteract;
-    }
-
-    private boolean _cancelAfkOnInteract() {
-        return config.getBoolean("cancel-afk-on-interact", true);
-    }
-
-    @Override
-    public boolean cancelAfkOnChat() {
-        return config.getBoolean("cancel-afk-on-chat", true);
-    }
-
-    @Override
-    public boolean cancelAfkOnFish() {
-        return config.getBoolean("cancel-afk-on-fish", true);
-    }
-
-    @Override
-    public boolean sleepIgnoresAfkPlayers() {
-        return sleepIgnoresAfkPlayers;
-    }
-
-    private boolean _sleepIgnoresAfkPlayers() {
-        return config.getBoolean("sleep-ignores-afk-players", true);
-    }
-
-    @Override
     public boolean sleepIgnoresVanishedPlayers() {
         return config.getBoolean("sleep-ignores-vanished-player", true);
-    }
-
-    public String _getAfkListName() {
-        return FormatUtil.replaceFormat(config.getString("afk-list-name", "none"));
-    }
-
-    @Override
-    public boolean isAfkListName() {
-        return isAfkListName;
-    }
-
-    @Override
-    public String getAfkListName() {
-        return afkListName;
-    }
-
-    @Override
-    public boolean broadcastAfkMessage() {
-        return broadcastAfkMessage;
-    }
-
-    private boolean _broadcastAfkMessage() {
-        return config.getBoolean("broadcast-afk-message", true);
     }
 
     @Override
@@ -1390,15 +1289,6 @@ public class Settings implements net.ess3.api.ISettings {
 
     private boolean _registerBackInListener() {
         return config.getBoolean("register-back-in-listener", false);
-    }
-
-    @Override
-    public boolean getDisableItemPickupWhileAfk() {
-        return disableItemPickupWhileAfk;
-    }
-
-    private boolean _getDisableItemPickupWhileAfk() {
-        return config.getBoolean("disable-item-pickup-while-afk", false);
     }
 
     private EventPriority getPriority(final String priority) {

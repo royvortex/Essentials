@@ -5,7 +5,6 @@ import com.earth2me.essentials.api.IAsyncTeleport;
 import com.earth2me.essentials.commands.IEssentialsCommand;
 import com.earth2me.essentials.config.entities.CommandCooldown;
 import net.ess3.api.MaxMoneyException;
-import net.ess3.api.events.AfkStatusChangeEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -77,8 +76,6 @@ public interface IUser {
     BigDecimal getMoney();
 
     void setMoney(final BigDecimal value) throws MaxMoneyException;
-
-    void setAfk(final boolean set, final AfkStatusChangeEvent.Cause cause);
 
     /**
      * 'Hidden' Represents when a player is hidden from others. This status includes when the player is hidden via other
@@ -177,12 +174,6 @@ public interface IUser {
     String getDisplayName();
 
     String getFormattedNickname();
-
-    String getAfkMessage();
-
-    void setAfkMessage(final String message);
-
-    long getAfkSince();
 
     boolean isAcceptingPay();
 
