@@ -101,15 +101,6 @@ public class SimpleMessageRecipient implements IMessageRecipient {
                 break;
             case SENDER_IGNORED:
                 break;
-            // When this recipient is AFK, notify the sender. Then, proceed to send the message.
-            case SUCCESS_BUT_AFK:
-                // Currently, only IUser can be afk, so we unsafely cast to get the afk message.
-                if (((IUser) recipient).getAfkMessage() != null) {
-                    sendTl("userAFKWithMessage", recipient.getDisplayName(), ((IUser) recipient).getAfkMessage());
-                } else {
-                    sendTl("userAFK", recipient.getDisplayName());
-                }
-                // fall through
             default:
                 sendTl("msgFormat", AdventureUtil.parsed(tlSender("meSender")), recipient.getDisplayName(), message);
 
@@ -153,13 +144,11 @@ public class SimpleMessageRecipient implements IMessageRecipient {
         }
 
         final User user = getUser(this);
-        boolean afk = false;
         boolean isLastMessageReplyRecipient = ess.getSettings().isLastMessageReplyRecipient();
         if (user != null) {
             if (user.isIgnoreMsg() && sender instanceof IUser && !((IUser) sender).isAuthorized("essentials.msgtoggle.bypass")) { // Don't ignore console and senders with permission
                 return MessageResponse.MESSAGES_IGNORED;
             }
-            afk = user.isAfk();
             isLastMessageReplyRecipient = user.isLastMessageReplyRecipient();
             // Check whether this recipient ignores the sender, only if the sender is not the console.
             if (sender instanceof IUser && user.isIgnoredPlayer((IUser) sender)) {
@@ -181,7 +170,7 @@ public class SimpleMessageRecipient implements IMessageRecipient {
             setReplyRecipient(sender);
         }
         this.lastMessageMs = System.currentTimeMillis();
-        return afk ? MessageResponse.SUCCESS_BUT_AFK : MessageResponse.SUCCESS;
+        return MessageResponse.SUCCESS;
     }
 
     @Override

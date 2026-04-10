@@ -117,10 +117,6 @@ public interface IMessageRecipient {
          */
         SUCCESS,
         /**
-         * States that the message was received, but the receiver was away, assuming the message was not read.
-         */
-        SUCCESS_BUT_AFK,
-        /**
          * States that the message was <b>NOT</b> received as a result of the receiver ignoring all messages.
          */
         MESSAGES_IGNORED,
@@ -143,7 +139,7 @@ public interface IMessageRecipient {
          * @return whether the response is a success
          */
         public boolean isSuccess() {
-            return this == SUCCESS || this == SUCCESS_BUT_AFK;
+            return this == SUCCESS;
         }
     }
 

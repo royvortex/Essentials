@@ -427,15 +427,6 @@ public abstract class UserData extends PlayerExtension implements IConf {
         return holder.ipAddress();
     }
 
-    public boolean isAfk() {
-        return holder.afk();
-    }
-
-    public void _setAfk(final boolean set) {
-        holder.afk(set);
-        config.save();
-    }
-
     public String getGeoLocation() {
         return holder.geolocation();
     }

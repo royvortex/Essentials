@@ -20,7 +20,6 @@ import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.event.connection.configuration.AsyncPlayerConnectionConfigureEvent;
 import io.papermc.paper.event.player.PlayerServerFullCheckEvent;
 import net.ess3.api.IEssentials;
-import net.ess3.api.events.AfkStatusChangeEvent;
 import net.ess3.provider.CommandSendListenerProvider;
 import net.ess3.provider.FormattedCommandAliasProvider;
 import net.ess3.provider.InventoryViewProvider;
@@ -232,37 +231,6 @@ public class EssentialsPlayerListener implements Listener {
             }
             return;
         }
-
-        if (!ess.getSettings().cancelAfkOnMove() && !ess.getSettings().getFreezeAfkPlayers()) {
-            return;
-        }
-
-        if (user.isAfk() && ess.getSettings().getFreezeAfkPlayers()) {
-            final Location from = event.getFrom();
-            final Location origTo = event.getTo();
-            final Location to = origTo.clone();
-            if (origTo.getY() >= from.getBlockY() + 1) {
-                user.updateActivityOnMove(true);
-                return;
-            }
-            to.setX(from.getX());
-            to.setY(from.getY());
-            to.setZ(from.getZ());
-            try {
-                if (event.getPlayer().getAllowFlight()) {
-                    // Don't teleport to a safe location here, they are either a god or flying
-                    throw new Exception();
-                }
-                event.setTo(LocationUtil.getSafeDestination(ess, to));
-            } catch (final Exception ex) {
-                event.setTo(to);
-            }
-            return;
-        }
-        final Location afk = user.getAfkPosition();
-        if (afk == null || !event.getTo().getWorld().equals(afk.getWorld()) || afk.distanceSquared(event.getTo()) > 9) {
-            user.updateActivityOnMove(true);
-        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -312,7 +280,7 @@ public class EssentialsPlayerListener implements Listener {
             }
         }
 
-        user.updateActivity(false, AfkStatusChangeEvent.Cause.QUIT);
+        user.updateActivity(false);
         if (!user.isHidden()) {
             user.setLastLogout(System.currentTimeMillis());
         }
@@ -368,7 +336,7 @@ public class EssentialsPlayerListener implements Listener {
             }
 
             user.checkMuteTimeout(currentTime);
-            user.updateActivity(false, AfkStatusChangeEvent.Cause.JOIN);
+            user.updateActivity(false);
             user.stopTransaction();
 
             joinFlow(user, currentTime, event.getJoinMessage(), event::setJoinMessage);
@@ -562,7 +530,7 @@ public class EssentialsPlayerListener implements Listener {
 
         final long currentTime = System.currentTimeMillis();
         dUser.checkMuteTimeout(currentTime);
-        dUser.updateActivity(false, AfkStatusChangeEvent.Cause.JOIN);
+        dUser.updateActivity(false);
         dUser.stopTransaction();
 
         ess.scheduleSyncDelayedTask(() -> {
@@ -1134,16 +1102,6 @@ public class EssentialsPlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onPlayerFishEvent(final PlayerFishEvent event) {
-        if (!ess.getSettings().cancelAfkOnFish()) {
-            return;
-        }
-
-        final User user = ess.getUser(event.getPlayer());
-        user.updateActivityOnInteract(true);
-    }
-
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerGameModeChange(final PlayerGameModeChangeEvent event) {
         if (!ess.getSettings().isGamemodeChangePreserveFlying()) {
@@ -1182,8 +1140,7 @@ public class EssentialsPlayerListener implements Listener {
                 return;
             }
             final User user = ess.getUser(event.getPlayer());
-            if ((ess.getSettings().getDisableItemPickupWhileAfk() && user.isAfk())
-                || (user.isVanished() && !user.isAuthorizedCached("essentials.vanish.pickup"))) {
+            if (user.isVanished() && !user.isAuthorizedCached("essentials.vanish.pickup")) {
                 event.setCancelled(true);
             }
         }
@@ -1194,8 +1151,7 @@ public class EssentialsPlayerListener implements Listener {
         public void onPlayerPickupItem(final org.bukkit.event.entity.EntityPickupItemEvent event) {
             if (event.getEntity() instanceof Player) {
                 final User user = ess.getUser((Player) event.getEntity());
-                if ((ess.getSettings().getDisableItemPickupWhileAfk() && user.isAfk())
-                    || (user.isVanished() && !user.isAuthorizedCached("essentials.vanish.pickup"))) {
+                if (user.isVanished() && !user.isAuthorizedCached("essentials.vanish.pickup")) {
                     event.setCancelled(true);
                 }
             }

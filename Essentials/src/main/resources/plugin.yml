@@ -8,10 +8,6 @@ softdepend: [Vault, LuckPerms]
 authors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, md_5, Iaccidentally, drtshock, vemacs, SupaHam, mdcfe, JRoy, pop4959]
 api-version: "1.13"
 commands:
-  afk:
-    description: Marks you as away-from-keyboard.
-    usage: /<command> [player/message...]
-    aliases: [eafk,away,eaway]
   antioch:
     description: 'A little surprise for operators.'
     usage: /<command> [message]
@@ -522,17 +518,6 @@ permissions:
     description: Give players with op everything by default
     children:
       essentials.gamemode.*: true
-  essentials.afk:
-    description: Allows access to the /afk command
-  essentials.afk.message:
-    description: Allows the player to set a custom AFK message
-  essentials.afk.others:
-    description: Allows the player to set another player's AFK status
-  essentials.afk.auto:
-    default: false
-    description: Players with this permission will be set to afk after a period of inaction as defined in the config file
-  essentials.afk.kickexempt:
-    description: Players with this permission will not be kicked for being AFK
   essentials.antioch:
     description: Allows access to the /antioch command
   essentials.back:

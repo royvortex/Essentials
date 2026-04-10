@@ -96,9 +96,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
     public User(final Player base, final IEssentials ess) {
         super(base, ess);
         teleport = new AsyncTeleport(this, ess);
-        if (isAfk()) {
-            afkPosition = this.getLocation();
-        }
         if (this.getBase().isOnline()) {
             lastOnlineActivity = System.currentTimeMillis();
         }
@@ -557,9 +554,7 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
     public void setDisplayNick() {
         if (base.isOnline() && ess.getSettings().changeDisplayName()) {
             this.getBase().setDisplayName(getNick(true));
-            if (isAfk()) {
-                updateAfkListName();
-            } else if (ess.getSettings().changePlayerListName()) {
+            if (ess.getSettings().changePlayerListName()) {
                 final String name = getNick(ess.getSettings().isAddingPrefixInPlayerlist(), ess.getSettings().isAddingSuffixInPlayerlist());
                 try {
                     this.getBase().setPlayerListName(name);
@@ -662,55 +657,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
         }
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void setAfk(final boolean set) {
-        setAfk(set, AfkStatusChangeEvent.Cause.UNKNOWN);
-    }
-
-    @Override
-    public void setAfk(final boolean set, final AfkStatusChangeEvent.Cause cause) {
-        final AfkStatusChangeEvent afkEvent = new AfkStatusChangeEvent(this, set, cause);
-        ess.getServer().getPluginManager().callEvent(afkEvent);
-        if (afkEvent.isCancelled()) {
-            return;
-        }
-
-        this.getBase().setSleepingIgnored(this.isAuthorized("essentials.sleepingignored") || set && ess.getSettings().sleepIgnoresAfkPlayers());
-        if (set && !isAfk()) {
-            afkPosition = this.getLocation();
-            this.afkSince = System.currentTimeMillis();
-        } else if (!set && isAfk()) {
-            afkPosition = null;
-            this.afkMessage = null;
-            this.afkSince = 0;
-        }
-        _setAfk(set);
-        updateAfkListName();
-    }
-
-    private void updateAfkListName() {
-        if (ess.getSettings().isAfkListName()) {
-            if (isAfk()) {
-                final String afkName = ess.getSettings().getAfkListName().replace("{PLAYER}", getDisplayName()).replace("{USERNAME}", getName());
-                getBase().setPlayerListName(afkName);
-            } else {
-                getBase().setPlayerListName(null);
-                setDisplayNick();
-            }
-        }
-    }
-
-    @Deprecated
-    public boolean toggleAfk() {
-        return toggleAfk(AfkStatusChangeEvent.Cause.UNKNOWN);
-    }
-
-    public boolean toggleAfk(final AfkStatusChangeEvent.Cause cause) {
-        setAfk(!isAfk(), cause);
-        return isAfk();
-    }
-
     @Override
     public boolean isHiddenFrom(Player player) {
         if (getBase() instanceof OfflinePlayerStub || player instanceof OfflinePlayerStub) {
@@ -751,96 +697,16 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
         return this.lastActivity;
     }
 
-    @Deprecated
     public void updateActivity(final boolean broadcast) {
-        updateActivity(broadcast, AfkStatusChangeEvent.Cause.UNKNOWN);
-    }
-
-    public void updateActivity(final boolean broadcast, final AfkStatusChangeEvent.Cause cause) {
-        if (isAfk()) {
-            setAfk(false, cause);
-            if (broadcast && !isHidden() && !isAfk()) {
-                setDisplayNick();
-                if (ess.getSettings().broadcastAfkMessage()) {
-                    ess.broadcastTl(this, u -> u == this, "userIsNotAway", getDisplayName());
-                }
-                sendTl("userIsNotAwaySelf", getDisplayName());
-            }
-        }
         lastActivity = System.currentTimeMillis();
     }
 
     public void updateActivityOnMove(final boolean broadcast) {
-        if (ess.getSettings().cancelAfkOnMove()) {
-            updateActivity(broadcast, AfkStatusChangeEvent.Cause.MOVE);
-        }
+        lastActivity = System.currentTimeMillis();
     }
 
     public void updateActivityOnInteract(final boolean broadcast) {
-        if (ess.getSettings().cancelAfkOnInteract()) {
-            updateActivity(broadcast, AfkStatusChangeEvent.Cause.INTERACT);
-        }
-    }
-
-    public void updateActivityOnChat(final boolean broadcast) {
-        if (ess.getSettings().cancelAfkOnChat()) {
-            //Chat happens async, make sure we have a sync context
-            ess.scheduleSyncDelayedTask(() -> updateActivity(broadcast, AfkStatusChangeEvent.Cause.CHAT));
-        }
-    }
-
-    public void checkActivity() {
-        // Graceful time before the first afk check call.
-        if (System.currentTimeMillis() - lastActivity <= 10000) {
-            return;
-        }
-
-        final long autoafktimeout = ess.getSettings().getAutoAfkTimeout();
-
-        // Checks if the player has been inactive for longer than the configured auto-afk-timeout time.
-        if (autoafktimeout > 0
-                && lastActivity > 0 && (lastActivity + (autoafktimeout * 1000)) < System.currentTimeMillis()
-                && !isAuthorized("essentials.kick.exempt")
-                && !isAuthorized("essentials.afk.kickexempt")) {
-            lastActivity = 0;
-            final double kickTime = autoafktimeout / 60.0;
-
-            // If `afk-timeout-command` in config.yml is empty, use default Essentials kicking behaviour instead of executing a command.
-            if (ess.getSettings().getAfkTimeoutCommands().isEmpty()) {
-                this.getBase().kickPlayer(ess.getAdventureFacet().miniToLegacy(playerTl("autoAfkKickReason", kickTime)));
-
-                for (final User user : ess.getOnlineUsers()) {
-                    if (user.isAuthorized("essentials.kick.notify")) {
-                        user.sendTl("playerKicked", Console.DISPLAY_NAME, getName(), user.playerTl("autoAfkKickReason", kickTime));
-                    }
-                }
-            } else {
-                // If `afk-timeout-commands` in config.yml is populated, execute the command(s) instead of kicking the player.
-                for (final String command : ess.getSettings().getAfkTimeoutCommands()) {
-                    if (command == null || command.isEmpty()){
-                        continue;
-                    }
-                    // Replace placeholders in the command with actual values.
-                    final String cmd = command.replace("{USERNAME}", getName()).replace("{KICKTIME}", String.valueOf(kickTime));
-                    ess.getServer().dispatchCommand(ess.getServer().getConsoleSender(), cmd);
-                }
-            }
-        }
-        final long autoafk = ess.getSettings().getAutoAfk();
-        if (!isAfk() && autoafk > 0 && lastActivity + autoafk * 1000 < System.currentTimeMillis() && isAuthorizedCached("essentials.afk.auto")) {
-            setAfk(true, AfkStatusChangeEvent.Cause.ACTIVITY);
-            if (isAfk() && !isHidden()) {
-                setDisplayNick();
-                if (ess.getSettings().broadcastAfkMessage()) {
-                    ess.broadcastTl(this, u -> u == this, "userIsAway", getDisplayName());
-                }
-                sendTl("userIsAwaySelf", getDisplayName());
-            }
-        }
-    }
-
-    public Location getAfkPosition() {
-        return afkPosition;
+        lastActivity = System.currentTimeMillis();
     }
 
     @Override
@@ -853,10 +719,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
             if (!ess.getSettings().getNoGodWorlds().contains(this.getLocation().getWorld().getName())) {
                 return true;
             }
-        }
-        if (isAfk()) {
-            // Protect AFK players by representing them in a god mode state to render them invulnerable to damage.
-            return ess.getSettings().getFreezeAfkPlayers();
         }
         return false;
     }
@@ -1139,23 +1001,6 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
     @Override
     public void setReplyRecipient(final IMessageRecipient recipient) {
         this.messageRecipient.setReplyRecipient(recipient);
-    }
-
-    @Override
-    public String getAfkMessage() {
-        return this.afkMessage;
-    }
-
-    @Override
-    public void setAfkMessage(final String message) {
-        if (isAfk()) {
-            this.afkMessage = message;
-        }
-    }
-
-    @Override
-    public long getAfkSince() {
-        return afkSince;
     }
 
     @Override

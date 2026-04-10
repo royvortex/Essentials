@@ -238,27 +238,10 @@ public class EssentialsEntityListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onEntityRegainHealth(final EntityRegainHealthEvent event) {
-        if (event.getRegainReason() == RegainReason.SATIATED && event.getEntity() instanceof Player && ess.getUser((Player) event.getEntity()).isAfk() && ess.getSettings().getFreezeAfkPlayers()) {
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onPotionSplashEvent(final PotionSplashEvent event) {
         for (final LivingEntity entity : event.getAffectedEntities()) {
             if (entity instanceof Player && ess.getUser((Player) entity).isGodModeEnabled()) {
                 event.setIntensity(entity, 0d);
-            }
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onEntityShootBow(final EntityShootBowEvent event) {
-        if (event.getEntity() instanceof Player) {
-            final User user = ess.getUser((Player) event.getEntity());
-            if (user.isAfk()) {
-                user.updateActivityOnInteract(true);
             }
         }
     }
