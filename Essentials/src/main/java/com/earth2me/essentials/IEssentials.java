@@ -84,8 +84,6 @@ public interface IEssentials extends Plugin {
 
     Backup getBackup();
 
-    RandomTeleport getRandomTeleport();
-
     UpdateChecker getUpdateChecker();
 
     BukkitTask runTaskAsynchronously(Runnable run);

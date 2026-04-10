@@ -266,10 +266,6 @@ commands:
     description: Set your home to your current location.
     usage: /<command> [[player:]name]
     aliases: [esethome,createhome,ecreatehome]
-  settpr:
-    description: Set the random teleport location and parameters.
-    usage: /<command> [center|minrange|maxrange] [value]
-    aliases: [esettpr, settprandom, esettprandom]
   setwarp:
     description: Creates a new warp.
     usage: /<command> <warp>
@@ -322,10 +318,6 @@ commands:
     description: Request to teleport to the specified player.
     usage: /<command> <player>
     aliases: [call,ecall,etpa,tpask,etpask]
-  tpaall:
-    description: Requests all players online to teleport to you.
-    usage: /<command> <player>
-    aliases: [etpaall]
   tpaccept:
     description: Accepts teleport requests.
     usage: /<command> [player|*]
@@ -354,14 +346,6 @@ commands:
     description: Teleport a player to you.
     usage: /<command> <player>
     aliases: [s,etphere]
-  tpo:
-    description: Teleport override for tptoggle.
-    usage: /<command> <player> [otherplayer]
-    aliases: [etpo]
-  tpohere:
-    description: Teleport here override for tptoggle.
-    usage: /<command> <player>
-    aliases: [etpohere]
   tppos:
     description: Teleport to coordinates.
     usage: /<command> <x> <y> <z> [yaw] [pitch] [world]
@@ -390,10 +374,6 @@ commands:
     description: Opens up a workbench.
     usage: /<command>
     aliases: [craft,ecraft,wb,ewb,wbench,ewbench,eworkbench]
-  world:
-    description: Switch between worlds.
-    usage: /<command> [world]
-    aliases: [eworld]
 
 permissions:
   essentials.*:
@@ -808,36 +788,12 @@ permissions:
     description: Allows access to teleporting to other users with the /tp command
   essentials.tp.position:
     description: Allows access to teleporting to a position with the /tp command
-  essentials.tpoffline:
-    description: Allows access to the /tpoffline command
-  essentials.tpa:
-    description: Allows access to the /tpa command
-  essentials.tpaall:
-    description: Allows access to the /tpaall command
-  essentials.tpacancel:
-    description: Allows access to the /tpaccept command
-  essentials.tpaccept:
-    description: Allows access to the /tpaccept command
-  essentials.tpahere:
-    description: Allows access to the /tpahere command
-  essentials.tpall:
-    description: Allows access to the /tpall command
-  essentials.tpdeny:
-    description: Allows access to the /tpdeny command
-  essentials.tphere:
-    description: Allows access to the /tphere command
-  essentials.tpo:
-    description: Allows access to the /tpo command
-  essentials.tpohere:
-    description: Allows access to the /tpohere command
   essentials.tppos:
     description: Allows access to the /tppos command
   essentials.tptoggle:
     description: Allows access to the /tptoggle command
   essentials.tptoggle.others:
     description: Allows access to the /tptoggle command for other players
-  essentials.settpr:
-    description: Allows access to the /settpr command
   essentials.vanish:
     description: Allows access to the /vanish command
   essentials.vanish.others:
@@ -883,10 +839,6 @@ permissions:
     description: Allows access to the /stonecutter command
   essentials.smithingtable:
     description: Allows access to the /smithingtable command
-  essentials.world:
-    description: Allows access to the /world command
-  essentials.worlds.<world-name>:
-    description: Allows access to the specific world with various commands
   essentials.signs.break.balance:
     description: Allows the bearer to break balance signs
   essentials.signs.break.disposal:

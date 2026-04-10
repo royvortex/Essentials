@@ -137,7 +137,6 @@ public class DumpCommand extends EssentialsTreeNode {
             boolean config = false;
             boolean discord = false;
             boolean log = false;
-            boolean tpr = false;
             boolean spawns = false;
             boolean commands = false;
             for (final String arg : args) {
@@ -145,7 +144,6 @@ public class DumpCommand extends EssentialsTreeNode {
                     config = true;
                     discord = true;
                     log = true;
-                    tpr = true;
                     spawns = true;
                     commands = true;
                     break;
@@ -155,8 +153,6 @@ public class DumpCommand extends EssentialsTreeNode {
                     discord = true;
                 } else if (arg.equalsIgnoreCase("log")) {
                     log = true;
-                } else if (arg.equalsIgnoreCase("tpr")) {
-                    tpr = true;
                 } else if (arg.equalsIgnoreCase("spawns")) {
                     spawns = true;
                 } else if (arg.equalsIgnoreCase("commands")) {
@@ -198,14 +194,6 @@ public class DumpCommand extends EssentialsTreeNode {
                             .replaceAll("(?:[0-9]{1,3}\\.){3}[0-9]{1,3}", "<censored ip address>")));
                 } catch (IOException e) {
                     sender.sendTl("dumpErrorUpload", "latest.log", e.getMessage());
-                }
-            }
-
-            if (tpr) {
-                try {
-                    files.add(new PasteUtil.PasteFile("tpr.yml", new String(Files.readAllBytes(ess.getRandomTeleport().getFile().toPath()), StandardCharsets.UTF_8)));
-                } catch (IOException e) {
-                    sender.sendTl("dumpErrorUpload", "tpr.yml", e.getMessage());
                 }
             }
 
@@ -251,7 +239,7 @@ public class DumpCommand extends EssentialsTreeNode {
 
     @Override
     protected List<String> tabComplete(CommandSource sender, String commandLabel, String[] args) {
-        final List<String> list = Lists.newArrayList("config", "log", "discord", "tpr", "spawns", "commands", "all");
+        final List<String> list = Lists.newArrayList("config", "log", "discord", "spawns", "commands", "all");
         for (String arg : args) {
             if (arg.equals("*") || arg.equalsIgnoreCase("all")) {
                 list.clear();

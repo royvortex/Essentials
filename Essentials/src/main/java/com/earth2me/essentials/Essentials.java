@@ -276,10 +276,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             balanceTop = new BalanceTopImpl(this);
             execTimer.mark("Init(BalanceTop)");
 
-            randomTeleport = new RandomTeleport(this);
-            confList.add(randomTeleport);
-            execTimer.mark("Init(RandomTeleport)");
-
             upgrade.afterSettings();
             execTimer.mark("Upgrade3");
 
@@ -872,11 +868,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     @Override
     public Backup getBackup() {
         return backup;
-    }
-
-    @Override
-    public RandomTeleport getRandomTeleport() {
-        return randomTeleport;
     }
 
     @Override
