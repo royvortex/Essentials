@@ -6,8 +6,6 @@ import com.earth2me.essentials.commands.IEssentialsCommand;
 import com.earth2me.essentials.config.entities.CommandCooldown;
 import net.ess3.api.MaxMoneyException;
 import net.ess3.api.events.AfkStatusChangeEvent;
-import net.essentialsx.api.v2.services.mail.MailMessage;
-import net.essentialsx.api.v2.services.mail.MailSender;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -188,22 +186,6 @@ public interface IUser {
      * @return Last activity time (Epoch Milliseconds)
      */
     long getLastActivityTime();
-
-    @Deprecated
-    List<String> getMails();
-
-    @Deprecated
-    void addMail(String mail);
-
-    void sendMail(MailSender sender, String message);
-
-    void sendMail(MailSender sender, String message, long expireAt);
-
-    ArrayList<MailMessage> getMailMessages();
-
-    void setMailList(ArrayList<MailMessage> messages);
-
-    int getMailAmount();
 
     boolean isAfk();
 

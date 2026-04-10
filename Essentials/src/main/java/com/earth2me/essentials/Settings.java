@@ -119,7 +119,6 @@ public class Settings implements net.ess3.api.ISettings {
     private boolean teleportInvulnerability;
     private long loginAttackDelay;
     private int signUsePerSecond;
-    private int mailsPerMinute;
     // #easteregg
     private long economyLagWarning;
     // #easteregg
@@ -899,7 +898,6 @@ public class Settings implements net.ess3.api.ISettings {
         commandCosts = _getCommandCosts();
         socialSpyCommands = _getSocialSpyCommands();
         warnOnBuildDisallow = _warnOnBuildDisallow();
-        mailsPerMinute = _getMailsPerMinute();
         maxMoney = _getMaxMoney();
         minMoney = _getMinMoney();
         permissionsLagWarning = _getPermissionsLagWarning();
@@ -1536,15 +1534,6 @@ public class Settings implements net.ess3.api.ISettings {
         return maxSpeed > 1.0 ? 1.0 : Math.abs(maxSpeed);
     }
 
-    private int _getMailsPerMinute() {
-        return config.getInt("mails-per-minute", 1000);
-    }
-
-    @Override
-    public int getMailsPerMinute() {
-        return mailsPerMinute;
-    }
-
     private long _getEconomyLagWarning() {
         // Default to 25ms
         return (long) (config.getDouble("economy-lag-warning", 25.0) * 1000000);
@@ -1659,11 +1648,6 @@ public class Settings implements net.ess3.api.ISettings {
     @Override
     public boolean hasJoinQuitMessagePlayerCount() {
         return getJoinQuitMessagePlayerCount() >= 0;
-    }
-
-    @Override
-    public boolean isNotifyNoNewMail() {
-        return config.getBoolean("notify-no-new-mail", true);
     }
 
     @Override
@@ -1943,11 +1927,6 @@ public class Settings implements net.ess3.api.ISettings {
     @Override
     public boolean isAddingSuffixInPlayerlist() {
         return config.getBoolean("add-suffix-in-playerlist", false);
-    }
-
-    @Override
-    public int getNotifyPlayerOfMailCooldown() {
-        return config.getInt("notify-player-of-mail-cooldown", 0);
     }
 
     @Override

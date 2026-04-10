@@ -1,12 +1,25 @@
 package com.earth2me.essentials.messaging;
 
-import net.essentialsx.api.v2.services.mail.MailSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 /**
  * Represents an interface for message recipients.
  */
-public interface IMessageRecipient extends MailSender {
+public interface IMessageRecipient {
+
+    /**
+     * Gets the username of this message recipient.
+     * @return The recipient's username.
+     */
+    String getName();
+
+    /**
+     * Gets the {@link UUID} of this message recipient or null if they don't have one.
+     * @return The recipient's {@link UUID} or null.
+     */
+    UUID getUUID();
 
     /**
      * Sends (prints) a message to this recipient.

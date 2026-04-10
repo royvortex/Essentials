@@ -485,16 +485,6 @@ public class EssentialsPlayerListener implements Listener {
             }
         }
 
-        if (!ess.getSettings().isCommandDisabled("mail") && user.isAuthorized("essentials.mail")) {
-            if (user.getUnreadMailAmount() == 0) {
-                if (ess.getSettings().isNotifyNoNewMail()) {
-                    user.sendTl("noNewMail"); // Only notify if they want us to.
-                }
-            } else {
-                user.notifyOfMail();
-            }
-        }
-
         if (user.isAuthorized("essentials.updatecheck")) {
             ess.runTaskAsynchronously(() -> {
                 for (final ComponentHolder component : ess.getUpdateChecker().getVersionMessages(false, false, user.getSource())) {

@@ -104,7 +104,6 @@ import net.ess3.provider.providers.PaperTickCountProvider;
 import net.ess3.provider.providers.PaperTileEntityProvider;
 import net.ess3.provider.providers.PrehistoricPotionMetaProvider;
 import net.essentialsx.api.v2.services.BalanceTop;
-import net.essentialsx.api.v2.services.mail.MailService;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -173,7 +172,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private transient ModernUserMap userMap;
     private transient BalanceTopImpl balanceTop;
     private transient ExecuteTimer execTimer;
-    private transient MailService mail;
     private transient I18n i18n;
     private transient MetricsWrapper metrics;
     private transient EssentialsTimer timer;
@@ -273,9 +271,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
 
             upgrade.preModules();
             execTimer.mark("Upgrade2");
-
-            mail = new MailServiceImpl(this);
-            execTimer.mark("Init(Mail)");
 
             userMap = new ModernUserMap(this);
             legacyUserMap = new UserMap(userMap);
@@ -770,11 +765,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             }
 
             final CommandSource sender = new CommandSource(this, cSender);
-
-            // New mail notification
-            if (user != null && !getSettings().isCommandDisabled("mail") && !command.getName().equals("mail") && user.isAuthorized("essentials.mail")) {
-                user.notifyOfMail();
-            }
 
             //Print version even if admin command is not available #easteregg
             if (commandLabel.equalsIgnoreCase("essversion")) {
@@ -1294,11 +1284,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     @Override
     public EssentialsTimer getTimer() {
         return timer;
-    }
-
-    @Override
-    public MailService getMail() {
-        return mail;
     }
 
     @Override

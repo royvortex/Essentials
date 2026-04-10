@@ -15,7 +15,6 @@ public enum Signs {
     INFO(new SignInfo()),
     KIT(new SignKit()),
     LOOM(new SignLoom()),
-    MAIL(new SignMail()),
     PROTECTION(new SignProtection()),
     REPAIR(new SignRepair()),
     SELL(new SignSell()),

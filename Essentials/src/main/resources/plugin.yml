@@ -287,10 +287,6 @@ commands:
     description: Opens up a loom.
     usage: /<command>
     aliases: [eloom]
-  mail:
-    description: Manages inter-player, intra-server mail.
-    usage: /<command> [read|clear|clear [number]|clear <player> [number]|send [to] [message]|sendtemp [to] [expire time] [message]|sendall [message]]
-    aliases: [email,eemail,memo,ememo]
   me:
     description: Describes an action in the context of the player.
     usage: /<command> <description>
@@ -1004,18 +1000,6 @@ permissions:
     description: Allows access to the /list command
   essentials.list.hidden:
     description: Allow access to view hidden players in the /list command
-  essentials.mail:
-    description: Allows access to the /mail command
-  essentials.mail.send:
-    description: Allows access to send mail with the /mail command
-  essentials.mail.sendall:
-    description: Allows access to send mail to all players with the /mail command
-  essentials.mail.sendtemp:
-    description: Allows access to send temporary mail with the /mail command
-  essentials.mail.clear.others:
-    description: Allows access to clear other players mail with the /mail command
-  essentials.mail.clearall:
-    description: Allows access to clear all mail with the /mail command
   essentials.me:
     description: Allows access to the /me command
   essentials.more:
@@ -1435,8 +1419,6 @@ permissions:
     description: Allows the bearer to break info signs
   essentials.signs.break.kit:
     description: Allows the bearer to break kit signs
-  essentials.signs.break.mail:
-    description: Allows the bearer to break mail signs
   essentials.signs.break.protection:
     description: Allows the bearer to break protection signs
   essentials.signs.break.repair:
@@ -1479,8 +1461,6 @@ permissions:
     description: Allows the bearer to use info signs
   essentials.signs.use.kit:
     description: Allows the bearer to use kit signs
-  essentials.signs.use.mail:
-    description: Allows the bearer to use mail signs
   essentials.signs.use.protection:
     description: Allows the bearer to use protection signs
   essentials.signs.use.repair:
@@ -1515,8 +1495,6 @@ permissions:
     description: Allows the bearer to create info signs
   essentials.signs.create.kit:
     description: Allows the bearer to create kit signs
-  essentials.signs.create.mail:
-    description: Allows the bearer to create mail signs
   essentials.signs.create.protection:
     description: Allows the bearer to create protection signs
   essentials.signs.create.repair:

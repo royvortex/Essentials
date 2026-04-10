@@ -281,8 +281,6 @@ public interface ISettings extends IConf {
 
     double getMaxWalkSpeed();
 
-    int getMailsPerMinute();
-
     long getEconomyLagWarning();
 
     long getPermissionsLagWarning();
@@ -322,8 +320,6 @@ public interface ISettings extends IConf {
     boolean isCustomServerFullMessage();
 
     boolean isCustomWhitelistMessage();
-
-    boolean isNotifyNoNewMail();
 
     boolean isDropItemsIfFull();
 
@@ -386,8 +382,6 @@ public interface ISettings extends IConf {
     boolean isAddingPrefixInPlayerlist();
 
     boolean isAddingSuffixInPlayerlist();
-
-    int getNotifyPlayerOfMailCooldown();
 
     int getMotdDelay();
 
