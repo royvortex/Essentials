@@ -135,7 +135,6 @@ public class Settings implements net.ess3.api.ISettings {
     private boolean npcsInBalanceRanking = false;
     private NumberFormat currencyFormat;
     private List<EssentialsSign> unprotectedSigns = Collections.emptyList();
-    private List<String> defaultEnabledConfirmCommands;
     private TeleportWhenFreePolicy teleportWhenFreePolicy;
     private boolean isCompassTowardsHomePerm;
     private boolean isAllowWorldInBroadcastworld;
@@ -523,16 +522,6 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
-    public CommentedConfigurationNode getKitSection() {
-        return config.getSection("kits");
-    }
-
-    @Override
-    public boolean isSkippingUsedOneTimeKitsFromKitList() {
-        return config.getBoolean("skip-used-one-time-kits-from-kit-list", false);
-    }
-
-    @Override
     public String getOperatorColor() {
         return operatorColor;
     }
@@ -760,11 +749,6 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
-    public String getNewPlayerKit() {
-        return config.getString("newbies.kit", "");
-    }
-
-    @Override
     public String getNewbieSpawn() {
         return config.getString("newbies.spawnpoint", "default");
     }
@@ -919,7 +903,6 @@ public class Settings implements net.ess3.api.ISettings {
         npcsInBalanceRanking = _isNpcsInBalanceRanking();
         currencyFormat = _getCurrencyFormat();
         unprotectedSigns = _getUnprotectedSign();
-        defaultEnabledConfirmCommands = _getDefaultEnabledConfirmCommands();
         teleportWhenFreePolicy = _getTeleportWhenFreePolicy();
         isCompassTowardsHomePerm = _isCompassTowardsHomePerm();
         isAllowWorldInBroadcastworld = _isAllowWorldInBroadcastworld();
@@ -1895,48 +1878,8 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
-    public boolean isKitAutoEquip() {
-        return config.getBoolean("kit-auto-equip", false);
-    }
-
-    @Override
-    public boolean isPastebinCreateKit() {
-        return config.getBoolean("pastebin-createkit", false);
-    }
-
-    @Override
-    public boolean isUseBetterKits() {
-        return config.getBoolean("use-nbt-serialization-in-createkit", false);
-    }
-
-    @Override
     public boolean isAllowBulkBuySell() {
         return config.getBoolean("allow-bulk-buy-sell", false);
-    }
-
-    @Override
-    public boolean isAllowSellNamedItems() {
-        return config.getBoolean("allow-selling-named-items", false);
-    }
-
-    @Override
-    public boolean isAddingPrefixInPlayerlist() {
-        return config.getBoolean("add-prefix-in-playerlist", false);
-    }
-
-    @Override
-    public boolean isAddingSuffixInPlayerlist() {
-        return config.getBoolean("add-suffix-in-playerlist", false);
-    }
-
-    @Override
-    public int getMotdDelay() {
-        return config.getInt("delay-motd", 0);
-    }
-
-    @Override
-    public boolean isDirectHatAllowed() {
-        return config.getBoolean("allow-direct-hat", true);
     }
 
     @Override
@@ -1963,16 +1906,6 @@ public class Settings implements net.ess3.api.ISettings {
         final List<String> commands = config.getList("default-enabled-confirm-commands", String.class);
         commands.replaceAll(String::toLowerCase);
         return commands;
-    }
-
-    @Override
-    public List<String> getDefaultEnabledConfirmCommands() {
-        return defaultEnabledConfirmCommands;
-    }
-
-    @Override
-    public boolean isConfirmCommandEnabledByDefault(final String commandName) {
-        return getDefaultEnabledConfirmCommands().contains(commandName.toLowerCase());
     }
 
     private TeleportWhenFreePolicy _getTeleportWhenFreePolicy() {

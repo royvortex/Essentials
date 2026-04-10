@@ -430,20 +430,6 @@ public class UserConfigHolder {
         }
 
         @DeleteOnEmpty
-        private @MonotonicNonNull Map<String, Long> kits;
-
-        public Map<String, Long> kits() {
-            if (this.kits == null) {
-                this.kits = new HashMap<>();
-            }
-            return this.kits;
-        }
-
-        public void kits(final Map<String, Long> value) {
-            this.kits = value;
-        }
-
-        @DeleteOnEmpty
         @DeleteIfIncomplete
         private @MonotonicNonNull List<CommandCooldown> commandCooldowns;
 

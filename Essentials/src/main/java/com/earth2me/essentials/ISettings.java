@@ -27,8 +27,6 @@ public interface ISettings extends IConf {
 
     boolean getAnnounceNewPlayers();
 
-    String getNewPlayerKit();
-
     String getBackupCommand();
 
     long getBackupInterval();
@@ -80,11 +78,6 @@ public interface ISettings extends IConf {
     boolean isSocialSpyDisplayNames();
 
     Set<String> getMuteCommands();
-
-    @Deprecated
-    CommentedConfigurationNode getKitSection();
-
-    boolean isSkippingUsedOneTimeKitsFromKitList();
 
     String getLocale();
 
@@ -368,12 +361,6 @@ public interface ISettings extends IConf {
     NumberFormat getCurrencyFormat();
 
     List<EssentialsSign> getUnprotectedSignNames();
-
-    boolean isKitAutoEquip();
-
-    boolean isPastebinCreateKit();
-
-    boolean isUseBetterKits();
 
     boolean isAllowBulkBuySell();
 

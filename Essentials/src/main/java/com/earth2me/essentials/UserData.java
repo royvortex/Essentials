@@ -569,20 +569,6 @@ public abstract class UserData extends PlayerExtension implements IConf {
         return ret;
     }
 
-    public long getKitTimestamp(String name) {
-        name = name.replace('.', '_').replace('/', '_').toLowerCase(Locale.ENGLISH);
-        if (holder.timestamps().kits() != null && holder.timestamps().kits().containsKey(name)) {
-            return holder.timestamps().kits().get(name);
-        }
-        return 0L;
-    }
-
-    public void setKitTimestamp(String name, final long time) {
-        name = name.replace('.', '_').replace('/', '_').toLowerCase(Locale.ENGLISH);
-        holder.timestamps().kits().put(name, time);
-        config.save();
-    }
-
     public List<CommandCooldown> getCooldownsList() {
         return holder.timestamps().commandCooldowns();
     }

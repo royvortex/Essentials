@@ -176,7 +176,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private transient MetricsWrapper metrics;
     private transient EssentialsTimer timer;
     private transient ProviderListener recipeBookEventProvider;
-    private transient Kits kits;
     private transient RandomTeleport randomTeleport;
     private transient UpdateChecker updateChecker;
     private transient AdventureFacet adventureFacet;
@@ -278,11 +277,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
 
             balanceTop = new BalanceTopImpl(this);
             execTimer.mark("Init(BalanceTop)");
-
-            kits = new Kits(this);
-            confList.add(kits);
-            upgrade.convertKits();
-            execTimer.mark("Kits");
 
             randomTeleport = new RandomTeleport(this);
             confList.add(randomTeleport);
@@ -911,11 +905,6 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     @Override
     public Backup getBackup() {
         return backup;
-    }
-
-    @Override
-    public Kits getKits() {
-        return kits;
     }
 
     @Override

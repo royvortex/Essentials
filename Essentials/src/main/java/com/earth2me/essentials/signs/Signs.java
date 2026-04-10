@@ -13,7 +13,6 @@ public enum Signs {
     GRINDSTONE(new SignGrindstone()),
     HEAL(new SignHeal()),
     INFO(new SignInfo()),
-    KIT(new SignKit()),
     LOOM(new SignLoom()),
     PROTECTION(new SignProtection()),
     REPAIR(new SignRepair()),
