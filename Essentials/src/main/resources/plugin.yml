@@ -15,10 +15,6 @@ commands:
   deathback:
     description: Teleports you to your location prior to death.
     usage: /<command> [player]
-  backup:
-    description: Runs the backup if configured.
-    usage: /<command>
-    aliases: [ebackup]
   balance:
     description: States the current balance of a player.
     usage: /<command> [player]
@@ -27,14 +23,6 @@ commands:
     description: Gets the top balance values.
     usage: /<command> [page]
     aliases: [ebalancetop,baltop,ebaltop]
-  beezooka:
-    description: Throw an exploding bee at your opponent.
-    usage: /<command>
-    aliases: [ebeezooka,beecannon,ebeecannon]
-  book:
-    description: Allows reopening and editing of sealed books.
-    usage: /<command> [title|author [name]]
-    aliases: [ebook]
   bottom:
     description: Teleport to the lowest block at your current position.
     usage: /<command>
@@ -67,9 +55,6 @@ commands:
     description: Describes your current bearing.
     usage: /<command>
     aliases: [ecompass,direction,edirection]
-  customtext:
-    description: Allows you to create custom text commands.
-    usage: /<alias> - Define in bukkit.yml
   delhome:
     description: Removes a home.
     usage: /<command> [player:]<name>
@@ -78,10 +63,6 @@ commands:
     description: Deletes the specified warp.
     usage: /<command> <warp>
     aliases: [edelwarp,remwarp,eremwarp,rmwarp,ermwarp]
-  depth:
-    description: States current depth, relative to sea level.
-    usage: /<command>
-    aliases: [edepth,height,eheight]
   disposal:
     description: Opens a portable disposal menu.
     usage: /<command>
@@ -198,10 +179,6 @@ commands:
     description: Lists the players near by or around a player.
     usage: /<command> [playername] [radius]
     aliases: [enear,nearby,enearby]
-  nick:
-    description: Change your nickname or that of another player.
-    usage: /<command> [player] <nickname|off>
-    aliases: [enick,nickname,enickname]
   nuke:
     description: May death rain upon them.
     usage: /<command> [player]
@@ -242,10 +219,6 @@ commands:
     description: Change whether the recipient of the reply is last recipient or last sender
     usage: /<command> [player] [on|off]
     aliases: [ertoggle, replytoggle, ereplytoggle]
-  realname:
-    description: Displays the username of a user based on nick.
-    usage: /<command> <nickname>
-    aliases: [erealname]
   recipe:
     description: Displays how to craft items.
     usage: /<command> <item> [number]
@@ -306,10 +279,6 @@ commands:
     description: Display/Change the world time. Defaults to current world.
     usage: /<command> [set|add] [day|night|dawn|17:30|4pm|4000ticks] [worldname|all]
     aliases: [day,eday,night,enight,etime]
-  top:
-    description: Teleport to the highest block at your current position.
-    usage: /<command>
-    aliases: [etop]
   tp:
     description: Teleport to a player.
     usage: /<command> <player> [otherplayer]
@@ -346,10 +315,6 @@ commands:
     description: Teleport a player to you.
     usage: /<command> <player>
     aliases: [s,etphere]
-  tppos:
-    description: Teleport to coordinates.
-    usage: /<command> <x> <y> <z> [yaw] [pitch] [world]
-    aliases: [etppos]
   tptoggle:
     description: Blocks all forms of teleportation.
     usage: /<command> [player] [on|off]
@@ -393,8 +358,6 @@ permissions:
     description: Players with this permission will have back location stored during any teleportation
   essentials.deathback.into.<world>:
     description: Allows the player to use the /deathback command to travel to a specific world
-  essentials.backup:
-    description: Allows access to the /backup command
   essentials.balance:
     description: Allows access to the /balance command
   essentials.balance.others:
@@ -406,14 +369,6 @@ permissions:
   essentials.balancetop.exclude:
     default: false
     description: Players with this permission are excluded from the balancetop
-  essentials.book:
-    description: Allows access to the /book command
-  essentials.book.author:
-    description: Allows access to edit book authors with the /book command
-  essentials.book.others:
-    description: Allows access to edit other players books with the /book command
-  essentials.book.title:
-    description: Allows access to edit book titles with the /book command
   essentials.bottom:
     description: Allows access to the /bottom command
   essentials.broadcast:
@@ -443,12 +398,8 @@ permissions:
     description: Allows access to the /compass command
   essentials.condense:
     description: Allows access to the /condense command
-  essentials.customtext:
-    description: Allows access to the /customtext command and all aliases
   essentials.delwarp:
     description: Allows access to the /delwarp command
-  essentials.depth:
-    description: Allows access to the /depth command
   essentials.disposal:
     description: Allows access to the /disposal command
   essentials.eco:
@@ -591,8 +542,6 @@ permissions:
     description: Allows the to join the server even if it is full
   essentials.whitelist.bypass:
     description: Allows a player to join the server even if they are not whitelisted.
-  essentials.beezooka:
-    description: Allows access to the /beezooka command
   essentials.list:
     description: Allows access to the /list command
   essentials.list.hidden:
@@ -632,26 +581,7 @@ permissions:
   essentials.near.exclude:
     default: false
     description: If the player should be excluded from near lookups.
-  essentials.nick:
-    description: Allows access to the /nick command
-  essentials.nick.color:
-    description: Allows access to the /nick command with color text
-  essentials.nick.format:
-    description: Allows access to the /nick command with formatting text
-  essentials.nick.magic:
-    description: Allows access to the /nick command with magic text
-  essentials.nick.rgb:
-    description: Allows access to the /nick command with RGB text
-  essentials.nick.others:
-    description: Allows access to the /nick command for other players
-  essentials.nick.blacklist.bypass:
-    description: Allows the bearer to bypass the nickname blacklist
-  essentials.nick.changecolors:
-    description: Allows the bearer to change **only** the color of their nickname
-  essentials.nick.allowunsafe:
-    default: false
-    description: If a player has this, they can set their username to any value. Use with caution, as this has the potential to break userdata files.
-  essentials.nick.hideprefix:
+  essentials.noon:
     default: false
     description: Players with this permission will not have the nickname prefix applied to them
   essentials.nocommandcost.all:
@@ -690,8 +620,6 @@ permissions:
     description: Allows access to the /pweather command for other players
   essentials.rtoggle:
     description: Allows access to the /rtoggle command
-  essentials.realname:
-    description: Allows access to the /realname command
   essentials.recipe:
     description: Allows access to the /recipe command
   essentials.remove:
@@ -776,8 +704,6 @@ permissions:
     description: Allows access to the /togglejail command
   essentials.togglejail.offline:
     description: Allows access to the /togglejail command for offline players
-  essentials.top:
-    description: Allows access to the /top command
   essentials.tp:
     description: Allows access to the /tp command
   essentials.tpauto:
@@ -788,8 +714,6 @@ permissions:
     description: Allows access to teleporting to other users with the /tp command
   essentials.tp.position:
     description: Allows access to teleporting to a position with the /tp command
-  essentials.tppos:
-    description: Allows access to the /tppos command
   essentials.tptoggle:
     description: Allows access to the /tptoggle command
   essentials.tptoggle.others:
