@@ -8,10 +8,6 @@ softdepend: [Vault, LuckPerms]
 authors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, md_5, Iaccidentally, drtshock, vemacs, SupaHam, mdcfe, JRoy, pop4959]
 api-version: "1.13"
 commands:
-  antioch:
-    description: 'A little surprise for operators.'
-    usage: /<command> [message]
-    aliases: [eantioch,grenade,egrenade,tnt,etnt]
   anvil:
     description: Opens up an Anvil.
     usage: /<command>
@@ -43,10 +39,6 @@ commands:
     description: Teleport to the lowest block at your current position.
     usage: /<command>
     aliases: [ ebottom ]
-  break:
-    description: Breaks the block you are looking at.
-    usage: /<command>
-    aliases: [ebreak]
   broadcast:
     description: Broadcasts a message to the entire server.
     usage: /<command> <msg>
@@ -55,10 +47,6 @@ commands:
     description: Broadcasts a message to a world.
     usage: /<command> <world> <msg>
     aliases: [bcw,ebcw,bcastw,ebcastw,ebroadcastworld,shoutworld,eshoutworld]
-  burn:
-    description: Set a player on fire.
-    usage: /<command> <player> <seconds>
-    aliases: [eburn]
   cartographytable:
     description: Opens up a cartography table.
     usage: /<command>
@@ -130,14 +118,6 @@ commands:
     description: Take off, and soar!
     usage: /<command> [player] [on|off]
     aliases: [efly]
-  fireball:
-    description: Throw a fireball or other assorted projectiles.
-    usage: /<command> [fireball|small|large|arrow|skull|egg|snowball|expbottle|dragon|splashpotion|lingeringpotion|trident] [speed]
-    aliases: [efireball,fireentity,efireentity,fireskull,efireskull]
-  firework:
-    description: Allows you to modify a stack of fireworks.
-    usage: /<command> <<meta param>|power [amount]|clear|fire [amount]>
-    aliases: [efirework]
   gamemode:
     description: Change player gamemode.
     usage: /<command> <survival|creative|adventure|spectator> [player]
@@ -218,10 +198,6 @@ commands:
     description: Kills specified player.
     usage: /<command> <player>
     aliases: [ekill]
-  lightning:
-    description: The power of Thor. Strike at cursor or player.
-    usage: /<command> [player] [power]
-    aliases: [elightning,shock,eshock,smite,esmite,strike,estrike,thor,ethor]
   list:
     description: List all online players.
     usage: /<command> [group]
@@ -501,8 +477,6 @@ permissions:
     description: Give players with op everything by default
     children:
       essentials.gamemode.*: true
-  essentials.antioch:
-    description: Allows access to the /antioch command
   essentials.deathback:
     description: Allows access to the /deathback command
   essentials.deathback.others:
@@ -538,16 +512,10 @@ permissions:
     description: Allows access to edit book titles with the /book command
   essentials.bottom:
     description: Allows access to the /bottom command
-  essentials.break:
-    description: Allows access to the /break command
-  essentials.break.bedrock:
-    description: Allows access to the /break command for bedrock
   essentials.broadcast:
     description: Allows access to the /broadcast command
   essentials.broadcastworld:
     description: Allows access to the /broadcastworld command
-  essentials.burn:
-    description: Allows access to the /burn command
   essentials.chat.ignoreexempt:
     default: false
     description: Someone with this permission will not be ignored, even if they are on another persons ignore list
@@ -619,36 +587,7 @@ permissions:
     description: Allows access to the /feed command
   essentials.feed.others:
     description: Allows access to the /feed command for other players
-  essentials.fireball:
-    description: Allows access to the /fireball command. Additional permissions are required for each type of fireball.
-  essentials.fireball.fireball:
-    description: Allows access to use the fireball in the /fireball command
-  essentials.fireball.small:
-    description: Allows access to use the small fireball in the /fireball command
-  essentials.fireball.large:
-    description: Allows access to use the large fireball in the /fireball command
-  essentials.fireball.arrow:
-    description: Allows access to use the arrows in the /fireball command
-  essentials.fireball.dragon:
-    description: Allows access to use the dragon in the /fireball command
-  essentials.fireball.splashpotion:
-    description: Allows access to use the splash potion in the /fireball command
-  essentials.fireball.lingeringpotion:
-    description: Allows access to use the lingering potion in the /fireball command
-  essentials.fireball.trident:
-    description: Allows access to use the trident in the /fireball command
-  essentials.fireball.skull:
-    description: Allows access to use the skull in the /fireball command
-  essentials.fireball.egg:
-    description: Allows access to use the egg in the /fireball command
-  essentials.fireball.snowball:
-    description: Allows access to use the snowball in the /fireball command
-  essentials.firework:
-    description: Allows access to the /firework command
-  essentials.firework.fire:
-    description: Allows the bearer to use the firework command to launch a copy of the firework in hand
-  essentials.firework.multiple:
-    description: Allows the bearer to use the firework command to launch multiple fireworks
+  essentials.flap:
   essentials.fly:
     description: Allows access to the /fly command
   essentials.fly.safelogin:
@@ -784,10 +723,6 @@ permissions:
     description: Allows a player to join the server even if they are not whitelisted.
   essentials.beezooka:
     description: Allows access to the /beezooka command
-  essentials.lightning:
-    description: Allows access to the /lightning command
-  essentials.lightning.others:
-    description: Allows access to the /lightning command for other players
   essentials.list:
     description: Allows access to the /list command
   essentials.list.hidden:
