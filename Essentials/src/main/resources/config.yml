@@ -473,8 +473,8 @@ per-player-locale: false
 # Some messages may use custom colors, which must be edited in the appropriate message files.
 # For more information on customizing messages, see https://essentialsx.net/wiki/Locale.html
 message-colors:
-  primary: '#ffaa00'
-  secondary: '#ff5555'
+  primary: '#34b4eb'
+  secondary: '#ffffff'
 
 # Turn off god mode when the player leaves the server.
 remove-god-on-disconnect: false
