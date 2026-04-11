@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CustomItemResolver implements IItemDb.ItemResolver, IConf {
     private final EssentialsConfiguration config;
     private final Essentials ess;
-    private final HashMap<String, String> map = new HashMap<>();
+    private final Map<String, String> map = new ConcurrentHashMap<>();
 
     public CustomItemResolver(final Essentials ess) {
         config = new EssentialsConfiguration(new File(ess.getDataFolder(), "custom_items.yml"), "/custom_items.yml");

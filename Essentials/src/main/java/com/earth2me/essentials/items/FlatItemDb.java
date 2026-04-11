@@ -22,22 +22,22 @@ import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class FlatItemDb extends AbstractItemDb {
     private static final Gson gson = new Gson();
 
     // Maps primary name to ItemData
-    private final transient Map<String, ItemData> items = new HashMap<>();
+    private final transient Map<String, ItemData> items = new ConcurrentHashMap<>();
 
     // Maps alias to primary name
-    private final transient Map<String, String> itemAliases = new HashMap<>();
+    private final transient Map<String, String> itemAliases = new ConcurrentHashMap<>();
 
     // Every known alias
     private final transient Set<String> allAliases = new HashSet<>();

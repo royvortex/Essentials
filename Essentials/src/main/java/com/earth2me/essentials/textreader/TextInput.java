@@ -20,13 +20,13 @@ import java.lang.ref.SoftReference;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TextInput implements IText {
-    private static final HashMap<String, SoftReference<TextInput>> cache = new HashMap<>();
+    private static final Map<String, SoftReference<TextInput>> cache = new ConcurrentHashMap<>();
     private final transient List<String> lines;
     private final transient List<String> chapters;
     private final transient Map<String, Integer> bookmarks;
