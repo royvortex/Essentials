@@ -739,16 +739,12 @@ public class EssentialsUpgrade {
         ess.getLogger().info("#### Starting Essentials UUID userdata conversion in a few seconds. ####");
         ess.getLogger().info("We recommend you take a backup of your server before upgrading from the old username system.");
 
-        try {
-            Thread.sleep(15000);
-        } catch (final InterruptedException ex) {
-            // NOOP
-        }
-
-        uuidFileConvert(ess, ignoreUFCache);
-
-        doneFile.setProperty("uuidFileChange", true);
-        doneFile.save();
+        // Schedule conversion asynchronously instead of blocking main thread for 15 seconds
+        Bukkit.getScheduler().runTaskLaterAsynchronously(ess, () -> {
+            uuidFileConvert(ess, ignoreUFCache);
+            doneFile.setProperty("uuidFileChange", true);
+            doneFile.save();
+        }, 300L); // 15 seconds = 300 ticks
     }
 
     private void banFormatChange() {
