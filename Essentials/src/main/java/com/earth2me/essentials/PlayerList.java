@@ -8,11 +8,11 @@ import org.bukkit.Server;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.earth2me.essentials.I18n.tlLiteral;
 
@@ -74,7 +74,7 @@ public final class PlayerList {
 
     // Build the basic player list, divided by groups.
     public static Map<String, List<User>> getPlayerLists(final IEssentials ess, final IUser sender, final boolean showHidden) {
-        final Map<String, List<User>> playerList = new HashMap<>();
+        final Map<String, List<User>> playerList = new ConcurrentHashMap<>();
         for (final User onlineUser : ess.getOnlineUsers()) {
             if ((sender == null && !showHidden && onlineUser.isHidden()) || (sender != null && !showHidden && onlineUser.isHiddenFrom(sender.getBase()))) {
                 continue;

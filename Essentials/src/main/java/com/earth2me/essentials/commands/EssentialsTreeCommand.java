@@ -9,13 +9,13 @@ import org.bukkit.Server;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class EssentialsTreeCommand extends EssentialsCommand {
-    private final Map<String, EssentialsTreeNode> nodes = new HashMap<>();
+    private final Map<String, EssentialsTreeNode> nodes = new ConcurrentHashMap<>();
     private final List<String> publicNodes = new ArrayList<>();
 
     public EssentialsTreeCommand(final String command) {

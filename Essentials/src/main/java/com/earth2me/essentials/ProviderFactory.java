@@ -11,14 +11,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class ProviderFactory {
-    private final Map<Class<? extends Provider>, Provider> providers = new HashMap<>();
-    private final Map<Class<? extends Provider>, List<Class<? extends Provider>>> registeredProviders = new HashMap<>();
+    private final Map<Class<? extends Provider>, Provider> providers = new ConcurrentHashMap<>();
+    private final Map<Class<? extends Provider>, List<Class<? extends Provider>>> registeredProviders = new ConcurrentHashMap<>();
     private final Essentials essentials;
 
     public ProviderFactory(final Essentials essentials) {
