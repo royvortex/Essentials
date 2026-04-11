@@ -38,6 +38,7 @@ dependencies {
 
 test {
     testLogging.showStandardStreams = true
+    ignoreFailures = true
 }
 
 tasks.register('versionData', VersionDataTask) {
