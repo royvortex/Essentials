@@ -16,7 +16,6 @@ import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.Flying;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
@@ -218,14 +217,14 @@ public class Commandremove extends EssentialsCommand {
                             }
                             break;
                         case AMBIENT:
-                            if (e instanceof Flying) {
+                            if (e instanceof Ambient) {
                                 e.remove();
                                 removed++;
                             }
                             break;
                         case HOSTILE:
                         case MONSTERS:
-                            if (e instanceof Monster || e instanceof ComplexLivingEntity || e instanceof Flying || e instanceof Slime) {
+                            if (e instanceof Monster || e instanceof ComplexLivingEntity || e instanceof Slime) {
                                 e.remove();
                                 removed++;
                             }
@@ -238,7 +237,7 @@ public class Commandremove extends EssentialsCommand {
                             }
                             break;
                         case MOBS:
-                            if (e instanceof Animals || e instanceof NPC || e instanceof Snowman || e instanceof WaterMob || e instanceof Monster || e instanceof ComplexLivingEntity || e instanceof Flying || e instanceof Slime || e instanceof Ambient) {
+                            if (e instanceof Animals || e instanceof NPC || e instanceof Snowman || e instanceof WaterMob || e instanceof Monster || e instanceof ComplexLivingEntity || e instanceof Slime || e instanceof Ambient) {
                                 e.remove();
                                 removed++;
                             }

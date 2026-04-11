@@ -5,7 +5,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.material.MaterialData;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -223,11 +222,10 @@ public final class MaterialUtil {
     public static Material convertFromLegacy(final int id, final byte damage) {
         for (final Material material : EnumSet.allOf(Material.class)) {
             if (material.getId() == id) {
-                try {
-                    return Bukkit.getUnsafe().fromLegacy(new MaterialData(material, damage));
-                } catch (final NoSuchMethodError error) {
-                    break;
-                }
+                // Modern approach using ItemStack
+                ItemStack stack = new ItemStack(material);
+                stack.setDurability(damage);
+                return stack.getType();
             }
         }
 

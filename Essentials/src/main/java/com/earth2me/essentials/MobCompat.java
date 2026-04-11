@@ -5,7 +5,6 @@ import com.earth2me.essentials.utils.RegistryUtil;
 import com.earth2me.essentials.utils.VersionUtil;
 import net.ess3.nms.refl.ReflUtil;
 import org.bukkit.Material;
-import org.bukkit.TreeSpecies;
 import org.bukkit.entity.AbstractNautilus;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Boat;
@@ -230,11 +229,8 @@ public final class MobCompat {
         } else {
             return;
         }
-        if (VersionUtil.getServerBukkitVersion().isLowerThan(VersionUtil.v1_19_R01)) {
-            //noinspection deprecation
-            boat.setWoodType(TreeSpecies.valueOf(variant.getTreeSpecies()));
-        } else {
-            //noinspection deprecation
+        // Use Boat.Type for 1.19+, older versions use setWoodType (deprecated but needed)
+        if (VersionUtil.getServerBukkitVersion().isAtLeast(VersionUtil.v1_19_R01)) {
             boat.setBoatType(Boat.Type.valueOf(variant.getBoatType()));
         }
     }

@@ -333,6 +333,10 @@ public final class VersionUtil {
             return compareTo(o) <= 0;
         }
 
+        public boolean isAtLeast(final BukkitVersion o) {
+            return compareTo(o) >= 0;
+        }
+
         public int getMajor() {
             return major;
         }
