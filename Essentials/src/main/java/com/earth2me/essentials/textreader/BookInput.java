@@ -62,7 +62,7 @@ public class BookInput implements IText {
                 if (inputRef == null || (input = inputRef.get()) == null || input.lastChange < lastChange) {
                     lines = new ArrayList<>();
                     chapters = new ArrayList<>();
-                    bookmarks = new HashMap<>();
+                    bookmarks = new ConcurrentHashMap<>();
                     cache.put(file.getName(), new SoftReference<>(this));
                     readFromfile = true;
                 } else {

@@ -8,16 +8,16 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class AlternativeCommandsHandler {
-    private final transient Map<String, List<WeakReference<Command>>> altCommands = new HashMap<>();
-    private final transient Map<String, String> disabledList = new HashMap<>();
+    private final transient Map<String, List<WeakReference<Command>>> altCommands = new ConcurrentHashMap<>();
+    private final transient Map<String, String> disabledList = new ConcurrentHashMap<>();
     private final transient IEssentials ess;
 
     public AlternativeCommandsHandler(final IEssentials ess) {
@@ -67,7 +67,7 @@ public class AlternativeCommandsHandler {
     }
 
     private List<Map.Entry<String, Command>> getPluginCommands(Plugin plugin) {
-        final Map<String, Command> commands = new HashMap<>();
+        final Map<String, Command> commands = new ConcurrentHashMap<>();
         for (final Map.Entry<String, Command> entry : ess.provider(KnownCommandsProvider.class).getKnownCommands().entrySet()) {
             if (entry.getValue() instanceof PluginIdentifiableCommand && ((PluginIdentifiableCommand) entry.getValue()).getPlugin().equals(plugin)) {
                 commands.put(entry.getKey(), entry.getValue());

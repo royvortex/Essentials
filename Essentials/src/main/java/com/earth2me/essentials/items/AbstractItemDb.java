@@ -40,12 +40,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public abstract class AbstractItemDb implements IConf, net.ess3.api.IItemDb {
 
     protected final IEssentials ess;
-    private final Map<PluginKey, ItemResolver> resolverMap = new HashMap<>();
+    private final Map<PluginKey, ItemResolver> resolverMap = new ConcurrentHashMap<>();
     protected boolean ready = false;
 
     AbstractItemDb(final IEssentials ess) {
@@ -79,12 +80,12 @@ public abstract class AbstractItemDb implements IConf, net.ess3.api.IItemDb {
 
     @Override
     public Map<PluginKey, ItemResolver> getResolvers() {
-        return new HashMap<>(resolverMap);
+        return new ConcurrentHashMap<>(resolverMap);
     }
 
     @Override
     public Map<PluginKey, ItemResolver> getResolvers(final Plugin plugin) {
-        final Map<PluginKey, ItemResolver> matchingResolvers = new HashMap<>();
+        final Map<PluginKey, ItemResolver> matchingResolvers = new ConcurrentHashMap<>();
         for (final PluginKey key : resolverMap.keySet()) {
             if (key.getPlugin().equals(plugin)) {
                 matchingResolvers.put(key, resolverMap.get(key));
