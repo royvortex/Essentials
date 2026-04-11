@@ -53,7 +53,8 @@ public final class VersionUtil {
 
     public static final boolean PRE_FLATTENING = VersionUtil.getServerBukkitVersion().isLowerThan(VersionUtil.v1_13_0_R01);
 
-    public static final List<String> officialPlugins = Arrays.asList(
+    // Use immutable Set for thread safety
+    public static final Set<String> officialPlugins = ImmutableSet.of(
             "EssentialsAntiBuild",
             "EssentialsChat",
             "EssentialsDiscord",
@@ -63,11 +64,10 @@ public final class VersionUtil {
             "EssentialsSpawn",
             "EssentialsXMPP"
     );
-    public static final List<String> warnPlugins = Arrays.asList(
+    public static final Set<String> warnPlugins = ImmutableSet.of(
             "PermissionsEx",
             "GroupManager",
             "bPermissions",
-
             // Brain-dead chat signing bypass that break EssentialsChat
             "NoChatReports",
             "NoEncryption"
