@@ -413,6 +413,7 @@ permissions:
   essentials.feed.others:
     description: Allows access to the /feed command for other players
   essentials.flap:
+    description: Allows access to the /flap command (removed)
   essentials.fly:
     description: Allows access to the /fly command
   essentials.fly.safelogin:
