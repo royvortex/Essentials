@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 import static com.earth2me.essentials.I18n.tlLiteral;
 
@@ -21,6 +22,11 @@ import static com.earth2me.essentials.I18n.tlLiteral;
  * @author Olof Larsson
  */
 public final class DescParseTickFormat {
+    // Pre-compiled regex patterns for performance
+    private static final Pattern TICKS_PATTERN = Pattern.compile("^[0-9]+ti?c?k?s?$");
+    private static final Pattern CLOCK_PATTERN = Pattern.compile("^[0-9]{2}[^0-9]?[0-9]{2}$");
+    private static final Pattern AM_PM_PATTERN = Pattern.compile("^[0-9]{1,2}([^0-9]?[0-9]{2})?(pm|am)$");
+
     // ============================================
     // First some information vars. TODO: Should this be in a config file?
     // --------------------------------------------
@@ -103,7 +109,7 @@ public final class DescParseTickFormat {
     }
 
     public static long parseTicks(String desc) throws NumberFormatException {
-        if (!desc.matches("^[0-9]+ti?c?k?s?$")) {
+        if (!TICKS_PATTERN.matcher(desc).matches()) {
             throw new NumberFormatException();
         }
 
@@ -113,7 +119,7 @@ public final class DescParseTickFormat {
     }
 
     public static long parse24(String desc) throws NumberFormatException {
-        if (!desc.matches("^[0-9]{2}[^0-9]?[0-9]{2}$")) {
+        if (!CLOCK_PATTERN.matcher(desc).matches()) {
             throw new NumberFormatException();
         }
 
@@ -130,7 +136,7 @@ public final class DescParseTickFormat {
     }
 
     public static long parse12(String desc) throws NumberFormatException {
-        if (!desc.matches("^[0-9]{1,2}([^0-9]?[0-9]{2})?(pm|am)$")) {
+        if (!AM_PM_PATTERN.matcher(desc).matches()) {
             throw new NumberFormatException();
         }
 
