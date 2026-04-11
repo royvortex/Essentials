@@ -277,12 +277,9 @@ player-commands:
   - chat.question
   - clearinventory
   - compass
-  - depth
   - delhome
   - getpos
-  - geoip.show
   - help
-  - helpop
   - home
   - home.others
   - ignore
@@ -293,26 +290,14 @@ player-commands:
   - list
   - mail
   - mail.send
-  - me
-  - motd
   - msg
   - msg.color
-  - nick
   - near
   - pay
-  - ping
-  - protect
   - r
-  - rules
   - renamehome
-  - realname
-  - seen
-  - sell
   - sethome
-  - setxmpp
-  - signs.create.protection
   - signs.create.trade
-  - signs.break.protection
   - signs.break.trade
   - signs.use.balance
   - signs.use.buy
@@ -324,7 +309,6 @@ player-commands:
   - signs.use.info
   - signs.use.kit
   - signs.use.mail
-  - signs.use.protection
   - signs.use.repair
   - signs.use.sell
   - signs.use.time
@@ -340,9 +324,7 @@ player-commands:
   - tpdeny
   - warp
   - warp.list
-  - world
   - worth
-  - xmpp
 
 # Use this option to force superperms-based permissions handler regardless of detected installed perms plugin.
 # This is useful if you want superperms-based permissions (with wildcards) for custom permissions plugins.
