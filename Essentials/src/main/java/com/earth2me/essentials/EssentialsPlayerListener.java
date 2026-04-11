@@ -350,7 +350,9 @@ public class EssentialsPlayerListener implements Listener {
     }
 
     private boolean hideJoinQuitMessages() {
-        return ess.getSettings().hasJoinQuitMessagePlayerCount() && ess.getServer().getOnlinePlayers().size() > ess.getSettings().getJoinQuitMessagePlayerCount();
+        // Cache size() to avoid multiple collection iterations
+        int onlineCount = ess.getServer().getOnlinePlayers().size();
+        return ess.getSettings().hasJoinQuitMessagePlayerCount() && onlineCount > ess.getSettings().getJoinQuitMessagePlayerCount();
     }
 
     private void legacyJoinFlow(final PlayerJoinEvent event) {
