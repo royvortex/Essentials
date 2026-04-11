@@ -29,11 +29,11 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.earth2me.essentials.I18n.tlLiteral;
 
@@ -129,8 +129,8 @@ public class DumpCommand extends EssentialsTreeNode {
         final Plugin essDiscordLink = Bukkit.getPluginManager().getPlugin("EssentialsDiscordLink");
         final Plugin essSpawn = Bukkit.getPluginManager().getPlugin("EssentialsSpawn");
 
-        final Map<String, Command> knownCommandsCopy = new HashMap<>(ess.provider(KnownCommandsProvider.class).getKnownCommands());
-        final Map<String, String> disabledCommandsCopy = new HashMap<>(ess.getAlternativeCommandsHandler().disabledCommands());
+        final Map<String, Command> knownCommandsCopy = new ConcurrentHashMap<>(ess.provider(KnownCommandsProvider.class).getKnownCommands());
+        final Map<String, String> disabledCommandsCopy = new ConcurrentHashMap<>(ess.getAlternativeCommandsHandler().disabledCommands());
 
         // Further operations will be heavy IO
         ess.runTaskAsynchronously(() -> {

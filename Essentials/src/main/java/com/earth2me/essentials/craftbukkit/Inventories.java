@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public final class Inventories {
@@ -173,7 +173,7 @@ public final class Inventories {
 
     public static Map<Integer, ItemStack> addItem(final Player player, final int maxStack, final boolean allowArmor, ItemStack... items) {
         items = normalizeItems(cloneItems(items));
-        final Map<Integer, ItemStack> leftover = new HashMap<>();
+        final Map<Integer, ItemStack> leftover = new ConcurrentHashMap<>();
         final InventoryData inventoryData = parseInventoryData(player.getInventory(), items, maxStack, allowArmor);
 
         final List<Integer> emptySlots = inventoryData.getEmptySlots();
@@ -378,7 +378,7 @@ public final class Inventories {
     private static InventoryData parseInventoryData(final Inventory inventory, final ItemStack[] items, final int maxStack, final boolean includeArmor) {
         final ItemStack[] inventoryContents = inventory.getContents();
         final List<Integer> emptySlots = new ArrayList<>();
-        final HashMap<ItemStack, List<Integer>> partialSlots = new HashMap<>();
+        final Map<ItemStack, List<Integer>> partialSlots = new ConcurrentHashMap<>();
 
         for (int i = 0; i < inventoryContents.length; i++) {
             if (isContortedSlot(i)) {

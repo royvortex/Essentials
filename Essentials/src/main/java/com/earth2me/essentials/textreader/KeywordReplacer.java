@@ -22,10 +22,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -278,7 +278,7 @@ public class KeywordReplacer implements IText {
 
                             //First lets build the per group playerlist
                             final Map<String, List<User>> playerList = PlayerList.getPlayerLists(ess, user, showHidden);
-                            outputList = new HashMap<>();
+                            outputList = new ConcurrentHashMap<>();
                             for (final String groupName : playerList.keySet()) {
                                 final List<User> groupUsers = playerList.get(groupName);
                                 if (groupUsers != null && !groupUsers.isEmpty()) {

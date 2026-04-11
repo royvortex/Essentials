@@ -26,10 +26,10 @@ import org.bukkit.inventory.TransmuteRecipe;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Commandrecipe extends EssentialsCommand {
     private static final Material FIREWORK_ROCKET = EnumUtil.getMaterial("FIREWORK_ROCKET", "FIREWORK");
@@ -182,7 +182,7 @@ public class Commandrecipe extends EssentialsCommand {
                 }
             }
         } else {
-            final HashMap<Material, String> colorMap = new HashMap<>();
+            final Map<Material, String> colorMap = new ConcurrentHashMap<>();
             int i = 1;
             for (final Character c : "abcdefghi".toCharArray()) {
                 final ItemStack item = recipeMap.get(c);
