@@ -22,12 +22,12 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
@@ -488,7 +488,7 @@ public abstract class UserData extends PlayerExtension implements IConf {
     }
 
     public Map<Pattern, Long> getCommandCooldowns() {
-        final Map<Pattern, Long> map = new HashMap<>();
+        final Map<Pattern, Long> map = new ConcurrentHashMap<>();
         for (final CommandCooldown c : getCooldownsList()) {
             if (c == null || c.isIncomplete()) {
                 // stupid solution to stupid problem

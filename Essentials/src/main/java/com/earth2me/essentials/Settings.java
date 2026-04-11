@@ -403,7 +403,7 @@ public class Settings implements net.ess3.api.ISettings {
     private Map<String, BigDecimal> _getCommandCosts() {
         final Map<String, CommentedConfigurationNode> section = ConfigurateUtil.getMap(config.getSection("command-costs"));
         if (!section.isEmpty()) {
-            final Map<String, BigDecimal> newMap = new HashMap<>();
+            final Map<String, BigDecimal> newMap = new ConcurrentHashMap<>();
             for (Map.Entry<String, CommentedConfigurationNode> entry : section.entrySet()) {
                 final String command = entry.getKey();
                 final CommentedConfigurationNode node = entry.getValue();
@@ -633,7 +633,7 @@ public class Settings implements net.ess3.api.ISettings {
 
         ChatFormats() {
             defaultFormat = null;
-            groupFormats = new HashMap<>();
+            groupFormats = new ConcurrentHashMap<>();
         }
 
         public String getFormat(String group, ChatType type, Supplier<String> configSupplier) {
@@ -694,7 +694,7 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     private Map<String, String> _getWorldAliases() {
-        final Map<String, String> map = new HashMap<>();
+        final Map<String, String> map = new ConcurrentHashMap<>();
         final CommentedConfigurationNode section = config.getSection("chat.world-aliases");
         if (section == null) {
             return map;
@@ -735,7 +735,7 @@ public class Settings implements net.ess3.api.ISettings {
                 return values;
             }
         }
-        final Map<String, Object> defaultMap = new HashMap<>();
+        final Map<String, Object> defaultMap = new ConcurrentHashMap<>();
         if (config.getBoolean("sort-list-by-groups", false)) {
             defaultMap.put("ListByGroup", "ListByGroup");
         } else {

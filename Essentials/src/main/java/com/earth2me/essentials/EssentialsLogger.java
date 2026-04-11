@@ -11,13 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class EssentialsLogger {
-    private final static Map<String, LoggerProvider> loggerProviders = new HashMap<>();
+    private final static Map<String, LoggerProvider> loggerProviders = new ConcurrentHashMap<>();
     private final static MethodHandle loggerFieldHandle;
 
     static {
