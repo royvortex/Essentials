@@ -11,17 +11,17 @@ import org.bukkit.Location;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import static com.earth2me.essentials.I18n.tlLiteral;
 
 public class Warps implements IConf, net.ess3.api.IWarps {
-    private final Map<StringIgnoreCase, EssentialsConfiguration> warpPoints = new HashMap<>();
+    private final Map<StringIgnoreCase, EssentialsConfiguration> warpPoints = new ConcurrentHashMap<>();
     private final File warpsFolder;
 
     public Warps(final File dataFolder) {

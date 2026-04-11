@@ -18,20 +18,20 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LegacyItemDb extends AbstractItemDb {
-    private final transient Map<String, Integer> items = new HashMap<>();
-    private final transient Map<ItemData, List<String>> names = new HashMap<>();
-    private final transient Map<ItemData, String> primaryName = new HashMap<>();
-    private final transient Map<Integer, ItemData> legacyIds = new HashMap<>();
-    private final transient Map<String, Short> durabilities = new HashMap<>();
-    private final transient Map<String, String> nbtData = new HashMap<>();
+    private final transient Map<String, Integer> items = new ConcurrentHashMap<>();
+    private final transient Map<ItemData, List<String>> names = new ConcurrentHashMap<>();
+    private final transient Map<ItemData, String> primaryName = new ConcurrentHashMap<>();
+    private final transient Map<Integer, ItemData> legacyIds = new ConcurrentHashMap<>();
+    private final transient Map<String, Short> durabilities = new ConcurrentHashMap<>();
+    private final transient Map<String, String> nbtData = new ConcurrentHashMap<>();
     private final transient ManagedFile file;
     private final transient Pattern splitPattern = Pattern.compile("((.*)[:+',;.](\\d+))");
     private final transient Pattern csvSplitPattern = Pattern.compile("(\"([^\"]*)\"|[^,]*)(,|$)");

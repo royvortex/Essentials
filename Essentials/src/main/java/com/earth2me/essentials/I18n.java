@@ -54,7 +54,7 @@ public class I18n implements net.ess3.api.II18n {
     private final transient Map<Locale, ResourceBundle> loadedBundles = new ConcurrentHashMap<>();
     private final transient List<Locale> loadingBundles = new ArrayList<>();
     private transient ResourceBundle localeBundle;
-    private final transient Map<Locale, Map<String, MessageFormat>> messageFormatCache = new HashMap<>();
+    private final transient Map<Locale, Map<String, MessageFormat>> messageFormatCache = new ConcurrentHashMap<>();
 
     public I18n(final IEssentials ess) {
         this.ess = ess;
