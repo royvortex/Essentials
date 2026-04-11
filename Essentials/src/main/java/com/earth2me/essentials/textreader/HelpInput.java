@@ -11,16 +11,16 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class HelpInput implements IText {
     private final transient List<String> lines = new ArrayList<>();
     private final transient List<String> chapters = new ArrayList<>();
-    private final transient Map<String, Integer> bookmarks = new HashMap<>();
+    private final transient Map<String, Integer> bookmarks = new ConcurrentHashMap<>();
 
     public HelpInput(final User user, final String match, final IEssentials ess) {
         boolean reported = false;

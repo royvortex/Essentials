@@ -6,16 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 /**
  * Abstraction layer for economy abstraction layers.
  */
 public final class EconomyLayers {
-    private static final Map<String, EconomyLayer> registeredLayers = new HashMap<>();
+    private static final Map<String, EconomyLayer> registeredLayers = new ConcurrentHashMap<>();
     private static final List<String> availableLayers = new ArrayList<>();
     private static EconomyLayer selectedLayer = null;
     private static boolean serverStarted = false;

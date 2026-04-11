@@ -15,10 +15,10 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Deprecated // This sign will be removed soon
 public class SignProtection extends EssentialsSign {
@@ -82,7 +82,7 @@ public class SignProtection extends EssentialsSign {
     }
 
     private Map<Location, SignProtectionState> getConnectedSigns(final Block block, final User user, final String username, final boolean secure) {
-        final Map<Location, SignProtectionState> signs = new HashMap<>();
+        final Map<Location, SignProtectionState> signs = new ConcurrentHashMap<>();
         getConnectedSigns(block, signs, user, username, secure ? 4 : 2);
         return signs;
     }

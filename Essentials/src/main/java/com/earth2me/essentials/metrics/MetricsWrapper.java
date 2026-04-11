@@ -12,15 +12,15 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MetricsWrapper {
 
     private final Essentials ess;
     private final Metrics metrics;
     private final JavaPlugin plugin;
-    private final Map<String, Boolean> commands = new HashMap<>();
+    private final Map<String, Boolean> commands = new ConcurrentHashMap<>();
 
     public MetricsWrapper(final JavaPlugin plugin, final int pluginId, final boolean includeCommands) {
         this.plugin = plugin;

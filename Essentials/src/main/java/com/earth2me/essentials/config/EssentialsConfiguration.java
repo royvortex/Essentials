@@ -32,12 +32,12 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -135,7 +135,7 @@ public class EssentialsConfiguration {
 
     public Map<String, LazyLocation> getLocationSectionMap(final String path) {
         final CommentedConfigurationNode node = getSection(path);
-        final Map<String, LazyLocation> result = new HashMap<>();
+        final Map<String, LazyLocation> result = new ConcurrentHashMap<>();
         for (final Map.Entry<String, CommentedConfigurationNode> entry : ConfigurateUtil.getMap(node).entrySet()) {
             final CommentedConfigurationNode jailNode = entry.getValue();
             try {
