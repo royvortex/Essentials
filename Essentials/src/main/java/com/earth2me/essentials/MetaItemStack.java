@@ -44,17 +44,17 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MetaItemStack {
-    private static final Map<String, DyeColor> colorMap = new HashMap<>();
-    private static final Map<String, FireworkEffect.Type> fireworkShape = new HashMap<>();
-    private static final transient Map<String, PluginItemTransformer> itemTransformers = new HashMap<>();
+    private static final Map<String, DyeColor> colorMap = new ConcurrentHashMap<>();
+    private static final Map<String, FireworkEffect.Type> fireworkShape = new ConcurrentHashMap<>();
+    private static final transient Map<String, PluginItemTransformer> itemTransformers = new ConcurrentHashMap<>();
     private static boolean useNewSkullMethod = true;
 
     static {

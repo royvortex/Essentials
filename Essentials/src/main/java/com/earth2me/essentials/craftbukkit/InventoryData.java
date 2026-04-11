@@ -2,14 +2,14 @@ package com.earth2me.essentials.craftbukkit;
 
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InventoryData {
     private final List<Integer> emptySlots;
-    private final HashMap<ItemStack, List<Integer>> partialSlots;
+    private final Map<ItemStack, List<Integer>> partialSlots;
 
-    public InventoryData(List<Integer> emptySlots, HashMap<ItemStack, List<Integer>> partialSlots) {
+    public InventoryData(List<Integer> emptySlots, Map<ItemStack, List<Integer>> partialSlots) {
         this.emptySlots = emptySlots;
         this.partialSlots = partialSlots;
     }
@@ -18,7 +18,7 @@ public class InventoryData {
         return emptySlots;
     }
 
-    public HashMap<ItemStack, List<Integer>> getPartialSlots() {
+    public Map<ItemStack, List<Integer>> getPartialSlots() {
         return partialSlots;
     }
 }

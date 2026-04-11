@@ -4,15 +4,15 @@ import com.earth2me.essentials.utils.RegistryUtil;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class Enchantments {
-    private static final Map<String, Enchantment> ENCHANTMENTS = new HashMap<>();
-    private static final Map<String, Enchantment> ALIASENCHANTMENTS = new HashMap<>();
+    private static final Map<String, Enchantment> ENCHANTMENTS = new ConcurrentHashMap<>();
+    private static final Map<String, Enchantment> ALIASENCHANTMENTS = new ConcurrentHashMap<>();
     private static boolean isFlat;
 
     static {

@@ -4,15 +4,15 @@ import com.earth2me.essentials.utils.NumberUtil;
 import com.earth2me.essentials.utils.RegistryUtil;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class Potions {
-    private static final Map<String, PotionEffectType> POTIONS = new HashMap<>();
-    private static final Map<String, PotionEffectType> ALIASPOTIONS = new HashMap<>();
+    private static final Map<String, PotionEffectType> POTIONS = new ConcurrentHashMap<>();
+    private static final Map<String, PotionEffectType> ALIASPOTIONS = new ConcurrentHashMap<>();
 
     static {
 

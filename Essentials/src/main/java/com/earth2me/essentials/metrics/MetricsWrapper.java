@@ -49,9 +49,9 @@ public class MetricsWrapper {
 
     private void addPermsChart() {
         metrics.addCustomChart(new DrilldownPie("permsPlugin", () -> {
-            final Map<String, Map<String, Integer>> result = new HashMap<>();
+            final Map<String, Map<String, Integer>> result = new ConcurrentHashMap<>();
             final String handler = ess.getPermissionsHandler().getName();
-            final Map<String, Integer> backend = new HashMap<>();
+            final Map<String, Integer> backend = new ConcurrentHashMap<>();
             final String backendName = ess.getPermissionsHandler().getBackendName();
             backend.put(backendName != null ? backendName : "Other", 1);
             result.put(handler, backend);
@@ -61,8 +61,8 @@ public class MetricsWrapper {
 
     private void addEconomyChart() {
         metrics.addCustomChart(new DrilldownPie("econPlugin", () -> {
-            final Map<String, Map<String, Integer>> result = new HashMap<>();
-            final Map<String, Integer> backend = new HashMap<>();
+            final Map<String, Map<String, Integer>> result = new ConcurrentHashMap<>();
+            final Map<String, Integer> backend = new ConcurrentHashMap<>();
             final EconomyLayer layer = EconomyLayers.getSelectedLayer();
             if (layer != null) {
                 backend.put(layer.getBackendName(), 1);
@@ -77,7 +77,7 @@ public class MetricsWrapper {
 
     private void addVersionHistoryChart() {
         metrics.addCustomChart(new MultiLineChart("versionHistory", () -> {
-            final HashMap<String, Integer> result = new HashMap<>();
+            final Map<String, Integer> result = new ConcurrentHashMap<>();
             result.put(plugin.getDescription().getVersion(), 1);
             return result;
         }));
@@ -93,7 +93,7 @@ public class MetricsWrapper {
         }
 
         metrics.addCustomChart(new AdvancedBarChart("commands", () -> {
-            final Map<String, int[]> result = new HashMap<>();
+            final Map<String, int[]> result = new ConcurrentHashMap<>();
             for (final Map.Entry<String, Boolean> entry : commands.entrySet()) {
                 if (entry.getValue()) {
                     result.put(entry.getKey(), new int[]{1, 0});

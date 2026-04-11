@@ -9,10 +9,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import static com.earth2me.essentials.I18n.tlLiteral;
@@ -133,8 +133,8 @@ public enum Mob {
     PARCHED("Parched", Enemies.ENEMY, "PARCHED"),
     ;
 
-    private static final Map<String, Mob> hashMap = new HashMap<>();
-    private static final Map<EntityType, Mob> bukkitMap = new HashMap<>();
+    private static final Map<String, Mob> hashMap = new ConcurrentHashMap<>();
+    private static final Map<EntityType, Mob> bukkitMap = new ConcurrentHashMap<>();
 
     static {
         for (final Mob mob : Mob.values()) {
