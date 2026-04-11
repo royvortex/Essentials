@@ -13,12 +13,12 @@ import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ConfigSerializable
 public class UserConfigHolder {
@@ -37,7 +37,7 @@ public class UserConfigHolder {
 
     public Map<String, LazyLocation> homes() {
         if (this.homes == null) {
-            this.homes = new HashMap<>();
+            this.homes = new ConcurrentHashMap<>();
         }
         return this.homes;
     }
@@ -71,7 +71,7 @@ public class UserConfigHolder {
 
     public Map<String, List<String>> powertools() {
         if (this.powertools == null) {
-            this.powertools = new HashMap<>();
+            this.powertools = new ConcurrentHashMap<>();
         }
         return this.powertools;
     }

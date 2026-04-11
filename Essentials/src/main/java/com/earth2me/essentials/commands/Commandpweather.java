@@ -9,15 +9,15 @@ import org.bukkit.WeatherType;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Commandpweather extends EssentialsLoopCommand {
     private static final List<String> getAliases = Arrays.asList("get", "list", "show", "display");
-    private static final Map<String, WeatherType> weatherAliases = new HashMap<>();
+    private static final Map<String, WeatherType> weatherAliases = new ConcurrentHashMap<>();
 
     static {
         weatherAliases.put("sun", WeatherType.CLEAR);
