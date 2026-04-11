@@ -31,34 +31,39 @@ abstract class CommandDataTask : DefaultTask() {
         val data: Map<String, Any> = yaml.load(pluginYml.inputStream())
         val commands = data["commands"] as? Map<String, Map<String, Any>> ?: emptyMap()
 
-        val extractedCommands = commands.mapValues { (_, details) ->
-            val aliases = when (val aliasesData = details["aliases"]) {
-                is String -> listOf(aliasesData)
-                is List<*> -> aliasesData.filterIsInstance<String>()
+        if (commands.isEmpty()) {
+            logger.warn("No commands found in plugin.yml for ${project.name}")
+            return
+        }
+
+        val extractedCommands = mutableMapOf<String, Map<String, Any>>()
+        for ((cmd, details) in commands) {
+            val detailsMap = details as? Map<String, Any> ?: emptyMap()
+            val aliasesList = detailsMap["aliases"]
+            val aliases = when (aliasesList) {
+                is String -> listOf(aliasesList)
+                is List<*> -> aliasesList.filterIsInstance<String>()
                 else -> emptyList()
             }
-
-            mapOf(
+            extractedCommands[cmd] = mapOf(
                 "aliases" to aliases,
-                "description" to "",
-                "usage" to "",
-                "usages" to mutableListOf<Map<String, String>>()
+                "description" to (detailsMap["description"] ?: ""),
+                "usage" to (detailsMap["usage"] ?: ""),
+                "usages" to mutableListOf<Map<String, Any>>()
             )
-        }.toMutableMap()
+        }
 
         val permissions = data["permissions"] as? Map<String, Map<String, Any>> ?: emptyMap()
 
-        val extractedPermissions = permissions.mapValues { (_, value) ->
-            val default = value["default"] ?: "op"
-            val description = value["description"] as? String ?: ""
-            val children = value["children"] as? Map<String, Any> ?: emptyMap()
-
-            mapOf(
-                "default" to default,
-                "description" to description,
-                "children" to children
+        val extractedPermissions = mutableMapOf<String, Map<String, Any>>()
+        for ((perm, value) in permissions) {
+            val valueMap = value as? Map<String, Any> ?: emptyMap()
+            extractedPermissions[perm] = mapOf(
+                "default" to (valueMap["default"] ?: "op"),
+                "description" to (valueMap["description"] ?: ""),
+                "children" to (valueMap["children"] ?: emptyMap<String, Any>())
             )
-        }.toMutableMap()
+        }
 
         if (extractedCommands.isEmpty()) {
             logger.warn("No commands found in plugin.yml for ${project.name}")
@@ -84,13 +89,11 @@ abstract class CommandDataTask : DefaultTask() {
                             "Usage" -> extractedCommands[command] = commandData + ("usage" to value.toString())
                         }
                     } else {
-                        val usagesList =
-                            commandData["usages"] as MutableList<Map<String, String>> // verbose command usages
+                        val usagesList = commandData["usages"] as MutableList<Map<String, Any>>
                         usagesList.add(
                             mapOf(
                                 "usage" to value.toString(),
-                                "description" to properties["${command}CommandUsage${index}Description"]?.toString()
-                                    .orEmpty()
+                                "description" to (properties["${command}CommandUsage${index}Description"]?.toString() ?: "")
                             )
                         )
                     }

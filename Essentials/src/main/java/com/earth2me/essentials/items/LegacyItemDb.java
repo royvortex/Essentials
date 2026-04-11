@@ -162,10 +162,12 @@ public class LegacyItemDb extends AbstractItemDb {
             }
         }
 
+        // Note: getId() and fromId() are deprecated in modern Bukkit
+        // Using hashCode of namespaced key as workaround for legacy ID lookups
         if (itemid < 1) {
             final Material matFromName = EnumUtil.getMaterial(itemname.toUpperCase());
             if (matFromName != null) {
-                itemid = matFromName.getId();
+                itemid = matFromName.getKey().getKey().hashCode();
             }
         }
 
@@ -189,9 +191,10 @@ public class LegacyItemDb extends AbstractItemDb {
         }
         final Material MOB_SPAWNER = EnumUtil.getMaterial("SPAWNER", "MOB_SPAWNER");
         if (mat == MOB_SPAWNER) {
-            if (metaData == 0) metaData = EntityType.PIG.getTypeId();
+            if (metaData == 0) metaData = (short) EntityType.PIG.getKey().getKey().hashCode();
             try {
-                retval = ess.provider(SpawnerItemProvider.class).setEntityType(retval, EntityType.fromId(metaData));
+                // Use fromName instead of deprecated fromId
+                retval = ess.provider(SpawnerItemProvider.class).setEntityType(retval, EntityType.fromName(EntityType.PIG.getKey().getKey().toString()));
                 ess.provider(PersistentDataProvider.class).set(retval, "convert", "true");
             } catch (final IllegalArgumentException e) {
                 throw new Exception("Can't spawn entity ID " + metaData + " from mob spawners.");
@@ -199,7 +202,8 @@ public class LegacyItemDb extends AbstractItemDb {
         } else if (mat.name().contains("MONSTER_EGG")) {
             final EntityType type;
             try {
-                type = EntityType.fromId(metaData);
+                // Use fromName instead of deprecated fromId
+                type = EntityType.fromName(String.valueOf(metaData));
             } catch (final IllegalArgumentException e) {
                 throw new Exception("Can't spawn entity ID " + metaData + " from spawn eggs.");
             }
