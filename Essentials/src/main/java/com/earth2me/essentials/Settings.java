@@ -38,6 +38,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,7 +75,7 @@ public class Settings implements net.ess3.api.ISettings {
     private Set<String> disabledCommands = new HashSet<>();
     private List<String> overriddenCommands = Collections.emptyList();
     private List<String> playerCommands = Collections.emptyList();
-    private final transient Map<String, Command> disabledBukkitCommands = new HashMap<>();
+    private final transient Map<String, Command> disabledBukkitCommands = new ConcurrentHashMap<>();
     private Map<String, BigDecimal> commandCosts;
     private Set<String> socialSpyCommands = new HashSet<>();
     private String nicknamePrefix = "~";
